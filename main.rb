@@ -1,9 +1,17 @@
+require 'dotenv/load'
+
+
 require './robot'
 require './api'
 
 
 def main
-    puts "hello"
+    puts "init.."
+
+    puts "ACCESS_KEY=#{ENV['ACCESS_KEY']}"
+    puts "SECRET_KEY=#{ENV['SECRET_KEY']}"
+
+    puts ENV['XXXXX']
 end
 
 main

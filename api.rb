@@ -279,23 +279,23 @@ class Api
 
 end
 
-# https://huobiapi.github.io/docs/spot/v1/cn/#5ea2e0cde2
+# # https://huobiapi.github.io/docs/spot/v1/cn/#5ea2e0cde2
 
-access_key = '40166dab-5b2f6f16-gr4edfki8l-fc3aa'
-secret_key = 'ceca241f-78d75a34-909b2b07-524c6'
-account_id = '12163165'
+# access_key = '40166dab-5b2f6f16-gr4edfki8l-fc3aa'
+# secret_key = 'ceca241f-78d75a34-909b2b07-524c6'
+# account_id = '12163165'
 
-client = Api.new(access_key,secret_key,account_id)
+# client = Api.new(access_key,secret_key,account_id)
 
-# account = client.accounts
+# # account = client.accounts
 
-# account_id = 12163165
+# # account_id = 12163165
 
 
-p client.balances
-# p client.symbols
-# p client.depth('ethbtc')
-# p client.history_kline('ethbtc',"1min")
-# p client.merged('ethbtc')
-# p client.trade_detail('ethbtc')
-# p client.history_trade('ethbtc')
+# p client.balances
+# # p client.symbols
+# # p client.depth('ethbtc')
+# # p client.history_kline('ethbtc',"1min")
+# # p client.merged('ethbtc')
+# # p client.trade_detail('ethbtc')
+# # p client.history_trade('ethbtc')
