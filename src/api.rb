@@ -97,6 +97,9 @@ class Api
   end
 
   ## 查询当前用户的所有账户(即account-id)
+  # {"status"=>"ok",
+  #   "data"=>[
+  #     {"id"=>12111111, "type"=>"spot", "subtype"=>"", "state"=>"working"}]}
   def accounts
     path = "/v1/account/accounts"
     request_method = "GET"

@@ -1,17 +1,32 @@
 require 'dotenv/load'
+require 'byebug'
 
 
-require './robot'
-require './api'
+require './src/robot'
+require './src/api'
+require './src/init'
+
+
+
+
 
 
 def main
-    puts "init.."
+    puts "start"
 
-    puts "ACCESS_KEY=#{ENV['ACCESS_KEY']}"
-    puts "SECRET_KEY=#{ENV['SECRET_KEY']}"
+    puts "init"
+    puts "load env..."
+    access_key = ENV['ACCESS_KEY']
+    secret_key = ENV['SECRET_KEY']
+    puts "ACCESS_KEY=#{access_key}"
+    puts "SECRET_KEY=#{secret_key}"
 
-    puts ENV['XXXXX']
+    init = Init.new(access_key, secret_key)
+    account_id = init.execute
+    puts "account_id=#{account_id}"
+
+
+    puts "end"
 end
 
 main
