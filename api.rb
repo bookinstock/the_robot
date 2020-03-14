@@ -8,7 +8,7 @@ require 'base64'
 require 'byebug'
 
 
-class HuobiPro
+class Api
 
   def initialize(access_key,secret_key,account_id,signature_version="2")
       @access_key = access_key
@@ -285,7 +285,7 @@ access_key = '40166dab-5b2f6f16-gr4edfki8l-fc3aa'
 secret_key = 'ceca241f-78d75a34-909b2b07-524c6'
 account_id = '12163165'
 
-client = HuobiPro.new(access_key,secret_key,account_id)
+client = Api.new(access_key,secret_key,account_id)
 
 # account = client.accounts
 
