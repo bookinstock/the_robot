@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Models
   class Kline
     include Virtus.model

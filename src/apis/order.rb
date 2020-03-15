@@ -107,6 +107,5 @@ module Apis
       request_method = 'POST'
       util(path, params, request_method)
     end
-
   end
 end

@@ -21,6 +21,5 @@ module Apis
       # balances = {"account_id"=>@account_id}
       util(path, {}, request_method)
     end
-
   end
 end

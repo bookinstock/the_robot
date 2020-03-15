@@ -2,8 +2,6 @@
 
 module Apis
   module Margin
-    
-
     ## 借贷订单
     def loan_orders(symbol, currency)
       path = '/v1/margin/loan-orders'
@@ -35,7 +33,5 @@ module Apis
       request_method = 'POST'
       util(path, params, request_method)
     end
-
-
   end
 end
