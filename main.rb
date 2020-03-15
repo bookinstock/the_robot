@@ -19,7 +19,6 @@ account_id = ENV['ACCOUNT_ID']
 
 api = Api.new(access_key, secret_key, account_id)
 
-
 # default => symbol='btcusdt', period='15min', size = 100
 klines = api.market_klines
 
@@ -30,17 +29,14 @@ klines.each do |kline|
   list << kline
 end
 
-
 puts "from #{klines.first.time} to #{klines.last.time}"
 
-
-#TODO show close price
+# TODO: show close price
 klines.each do |e|
   puts e.close
 end
 
-
-#TODO find trend change point
+# TODO: find trend change point
 prev_trend = nil
 prev_kline = nil
 klines.each_with_index do |kline, idx|
@@ -50,12 +46,12 @@ klines.each_with_index do |kline, idx|
     next
   end
 
-  if kline.close < prev_kline.close
-    trend = :down
-  else
-    trend = :up
-  end 
-  
+  trend = if kline.close < prev_kline.close
+            :down
+          else
+            :up
+          end
+
   # trend not change
   msg =
     if trend == prev_trend
@@ -64,7 +60,7 @@ klines.each_with_index do |kline, idx|
       elsif trend == :up
         "--up--#{kline.close}"
       else
-        "!!!wtf1"
+        '!!!wtf1'
       end
     else # trend change
       if trend == :up
@@ -72,7 +68,7 @@ klines.each_with_index do |kline, idx|
       elsif trend == :down
         "change!-down-#{kline.close}"
       else
-        "!!!wtf2"
+        '!!!wtf2'
       end
     end
 
@@ -83,7 +79,6 @@ klines.each_with_index do |kline, idx|
 end
 
 ### separate
-
 
 def main
   puts 'start'
@@ -106,9 +101,6 @@ def main
     init = Init.new(access_key, secret_key)
     api = init.execute
   end
-
-
-
 
   # accountmodule
   # accounts
