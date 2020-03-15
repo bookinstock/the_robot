@@ -1,11 +1,18 @@
 # frozen_string_literal: true
-
-require 'dotenv/load'
 require 'byebug'
+require 'dotenv/load'
+require 'virtus'
+require 'redis-objects'
+require 'connection_pool'
+Redis::Objects.redis = ConnectionPool.new(size: 5, timeout: 5) do
+  Redis.new(:host => '127.0.0.1', :port => 6379)
+end
+
 
 require './src/robot'
 require './src/api'
 require './src/init'
+
 
 access_key = ENV['ACCESS_KEY']
 secret_key = ENV['SECRET_KEY']
