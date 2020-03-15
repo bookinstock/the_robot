@@ -9,12 +9,18 @@ require 'base64'
 
 require 'byebug'
 
+require_relative 'apis/account'
 require_relative 'apis/common'
 require_relative 'apis/market'
+require_relative 'apis/margin'
+require_relative 'apis/order'
 
 class Api
+  include Apis::Account
   include Apis::Common
   include Apis::Market
+  include Apis::Margin
+  include Apis::Order
 
   attr_accessor :access_key, :secret_key, :account_id
 
@@ -30,173 +36,6 @@ class Api
       'Accept-Language' => 'zh-CN',
       'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36'
     }
-  end
-
-  #---account
-  ## 查询当前用户的所有账户(即account-id)
-  # {"status"=>"ok",
-  #   "data"=>[
-  #     {"id"=>12111111, "type"=>"spot", "subtype"=>"", "state"=>"working"}]}
-  def accounts
-    path = '/v1/account/accounts'
-    request_method = 'GET'
-    params = {}
-    json = util(path, params, request_method)
-  end
-
-  ## 获取账户资产状况
-  def balances
-    path = "/v1/account/accounts/#{@account_id}/balance"
-    request_method = 'GET'
-    # balances = {"account_id"=>@account_id}
-    util(path, {}, request_method)
-  end
-
-  # params
-  # # currency
-  # def history
-  #   path = "v1/account/history"
-  #   request_method = "GET"
-  #   params = {"account_id"=>@account_id}
-  #   util(path,params,request_method)
-  # end
-
-  ## 创建并执行一个新订单
-  ## 如果使用借贷资产交易
-  ## 请在下单接口/v1/order/orders/place
-  ## 请求参数source中填写'margin-api'
-  def new_order(symbol, side, price, count)
-    params = {
-      'account-id' => @account_id,
-      'amount' => count,
-      'price' => price,
-      'source' => 'api',
-      'symbol' => symbol,
-      'type' => "#{side}-limit"
-    }
-    path = '/v1/order/orders/place'
-    request_method = 'POST'
-    util(path, params, request_method)
-  end
-
-  ## 申请提现虚拟币
-  def withdraw_virtual_create(address, amount, currency)
-    path = '/v1/dw/withdraw/api/create'
-    params = {
-      'address' => address,
-      'amount' => amount,
-      'currency' => currency
-    }
-    request_method = 'POST'
-    util(path, params, request_method)
-  end
-
-  ## 申请取消提现虚拟币
-  def withdraw_virtual_cancel(withdraw_id)
-    path = "/v1/dw/withdraw-virtual/#{withdraw_id}/cancel"
-    params = { 'withdraw_id' => withdraw_id }
-    request_method = 'POST'
-    util(path, params, request_method)
-  end
-
-  ## 查询某个订单详情
-  def order_status(order_id, _market)
-    path = "/v1/order/orders/#{order_id}"
-    request_method = 'GET'
-    params = { 'order-id' => order_id }
-    util(path, params, request_method)
-  end
-
-  ## 申请撤销一个订单请求
-  def submitcancel(order_id)
-    path = "/v1/order/orders/#{order_id}/submitcancel"
-    request_method = 'POST'
-    params = { 'order-id' => order_id }
-    util(path, params, request_method)
-  end
-
-  ## 批量撤销订单
-  def batchcancel(order_ids)
-    path = '/v1/order/orders/batchcancel'
-    request_method = 'POST'
-    params = { 'order-ids' => order_ids }
-    util(path, params, request_method)
-  end
-
-  ## 查询某个订单的成交明细
-  def matchresults(order_id)
-    path = "/v1/order/orders/#{order_id}/matchresults"
-    request_method = 'GET'
-    params = { 'order-id' => order_id }
-    util(path, params, request_method)
-  end
-
-  ## 查询当前委托、历史委托
-  def open_orders(symbol, side)
-    params = {
-      'symbol' => symbol,
-      'types' => "#{side}-limit",
-      'states' => 'pre-submitted,submitted,partial-filled,partial-canceled'
-    }
-    path = '/v1/order/orders'
-    request_method = 'GET'
-    util(path, params, request_method)
-  end
-
-  ## 查询当前成交、历史成交
-  def history_matchresults(symbol)
-    path = '/v1/order/matchresults'
-    params = { 'symbol' => symbol }
-    request_method = 'GET'
-    util(path, params, request_method)
-  end
-
-  ## 现货账户划入至借贷账户
-  def transfer_in_margin(symbol, currency, amount)
-    path = '/v1/dw/transfer-in/margin'
-    params = { 'symbol' => symbol, 'currency' => currency, 'amount' => amount }
-    request_method = 'POST'
-    util(path, params, request_method)
-  end
-
-  ## 借贷账户划出至现货账户
-  def transfer_out_margin(symbol, currency, amount)
-    path = '/v1/dw/transfer-out/margin'
-    params = { 'symbol' => symbol, 'currency' => currency, 'amount' => amount }
-    request_method = 'POST'
-    util(path, params, request_method)
-  end
-
-  ## 借贷订单
-  def loan_orders(symbol, currency)
-    path = '/v1/margin/loan-orders'
-    params = { 'symbol' => symbol, 'currency' => currency }
-    request_method = 'POST'
-    util(path, params, request_method)
-  end
-
-  ## 归还借贷
-  def repay(order_id, amount)
-    path = '/v1/margin/orders/{order-id}/repay'
-    params = { 'order-id' => order_id, 'amount' => amount }
-    request_method = 'GET'
-    util(path, params, request_method)
-  end
-
-  ## 借贷账户详情
-  def margin_accounts_balance(_symbol)
-    path = '/v1/margin/accounts/balance?symbol={symbol}'
-    params = {}
-    request_method = 'GET'
-    util(path, params, request_method)
-  end
-
-  ## 申请借贷
-  def margin_orders(symbol, currency, amount)
-    path = '/v1/margin/orders'
-    params = { 'symbol' => symbol, 'currency' => currency, 'amount' => amount }
-    request_method = 'POST'
-    util(path, params, request_method)
   end
 
   private
