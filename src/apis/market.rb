@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require_relative '../models/kline'
 
 module Apis
   module Market
@@ -16,11 +17,15 @@ module Apis
       util(path, params, request_method)
     end
 
-    def market_klines(symbol, period, size = 150)
+    # symbol => btcusdt, ethbtc...
+    # period => 1min, 5min, 15min, 30min, 60min, 4hour, 1day, 1mon, 1week, 1year
+    # size => 0..2000
+    def market_klines(symbol='btcusdt', period='15min', size = 100)
       path = '/market/history/kline'
       request_method = 'GET'
       params = { 'symbol' => symbol, 'period' => period, 'size' => size }
-      util(path, params, request_method)
+      response = util(path, params, request_method)
+      response['data'].map { |e| Models::Kline.new(e) }
     end
 
     def market_ticker(symbol)
