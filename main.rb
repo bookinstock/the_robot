@@ -19,13 +19,70 @@ account_id = ENV['ACCOUNT_ID']
 
 api = Api.new(access_key, secret_key, account_id)
 
-x = api.common_symbols
 
-data = x['data']
+# default => symbol='btcusdt', period='15min', size = 100
+klines = api.market_klines
 
-data.find { |e| e['symbol'] == 'btcusdt' }
+# store in redis
+list = Redis::List.new('klans', marshal: true)
+list.clear
+klines.each do |kline|
+  list << kline
+end
 
-x = api.market_klines('btcusdt')
+
+puts "from #{klines.first.time} to #{klines.last.time}"
+
+
+
+
+
+#TODO find trend change point
+prev_trend = nil
+prev_kline = nil
+klines.each_with_index do |kline, idx|
+  if prev_kline
+    if prev_kline.close > kline.open
+      trend = :down
+    else
+      trend = :up
+    end
+  end
+
+  # trend not change
+  msg =
+    if trend == prev_kline
+      if prev_trend == :down
+        "--up--#{kline.close}"
+      elsif prev_trend == :up
+        "--down--#{kline.close}"
+      else
+        "!!!wtf"
+      end
+    else # trend change
+      if prev_trend == :down && trend == :up
+        "change!-up-#{kline.close}"
+      elsif prev_trend == :up && trend == :down
+        "change!-down-#{kline.close}"
+      else
+        if prev_trend == nil
+          "start-#{kline.close}"
+        elsif trend == nil
+          "end-#{kline.close}"
+        else
+          "!!!wtf2"
+        end
+      end
+    end
+
+  puts "-#{idx}:#{msg}"
+
+  prev_trend = trend
+  prev_kline = kline
+end
+
+### separate
+
 
 def main
   puts 'start'
@@ -49,6 +106,9 @@ def main
     api = init.execute
   end
 
+
+
+
   # accountmodule
   # accounts
 
@@ -64,8 +124,8 @@ def main
   puts 'end'
 end
 
-main
+# main
 
-robot = Robot.new
+# robot = Robot.new
 
-robot.execute
+# robot.execute
