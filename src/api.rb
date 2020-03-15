@@ -9,6 +9,7 @@ require 'byebug'
 
 
 class Api
+  attr_accessor :access_key, :secret_key, :account_id
 
   def initialize(access_key,secret_key,account_id,signature_version="2")
       @access_key = access_key
@@ -96,6 +97,8 @@ class Api
     util(path,params,request_method)
   end
 
+
+#---account
   ## 查询当前用户的所有账户(即account-id)
   # {"status"=>"ok",
   #   "data"=>[
@@ -111,9 +114,18 @@ class Api
   def balances
     path = "/v1/account/accounts/#{@account_id}/balance"
     request_method = "GET"
-    balances = {"account_id"=>@account_id}
+    # balances = {"account_id"=>@account_id}
     util(path,{},request_method)
   end
+
+  # params
+  # # currency
+  # def history
+  #   path = "v1/account/history"
+  #   request_method = "GET"
+  #   params = {"account_id"=>@account_id}
+  #   util(path,params,request_method)
+  # end
 
   ## 创建并执行一个新订单
   ## 如果使用借贷资产交易
@@ -263,6 +275,8 @@ class Api
     data = "#{request_method}\napi.huobi.pro\n#{path}\n#{Rack::Utils.build_query(hash_sort(h))}"
     h["Signature"] = sign(data)
     url = "https://api.huobi.pro#{path}?#{Rack::Utils.build_query(h)}"
+
+
     http = Net::HTTP.new(@uri.host, @uri.port)
     http.use_ssl = true
     begin

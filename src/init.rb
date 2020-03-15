@@ -16,6 +16,13 @@ class Init
         accounts = @api.accounts()
         account_ids = accounts['data'].select {|e| e['state'] == 'working'}.map {|e| e['id']}
         account_id = account_ids.first
+
+        if account_id
+            @api.account_id = account_id
+            @api
+        else
+            raise 'account_id not found!'
+        end
     end
 end
 
