@@ -17,10 +17,9 @@ x = api.common_symbols
 
 data = x['data']
 
-data.find {|e| e['symbol']=='btcusdt'}
+data.find { |e| e['symbol'] == 'btcusdt' }
 
-x = api.market_klines("btcusdt")
-
+x = api.market_klines('btcusdt')
 
 def main
   puts 'start'

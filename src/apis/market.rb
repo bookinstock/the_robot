@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Apis
   module Market
     def market_depth(symbol, type = 'step0')

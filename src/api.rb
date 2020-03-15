@@ -32,8 +32,6 @@ class Api
     }
   end
 
-
-
   #---account
   ## 查询当前用户的所有账户(即account-id)
   # {"status"=>"ok",
@@ -232,7 +230,6 @@ class Api
     Hash[ha.sort_by { |key, _val| key }]
   end
 end
-
 
 # client = Api.new(access_key,secret_key,account_id)
 
