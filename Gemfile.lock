@@ -20,6 +20,9 @@ GEM
       ast (~> 2.4.0)
     rainbow (3.0.0)
     rake (13.0.1)
+    redis (4.1.3)
+    redis-objects (1.5.0)
+      redis (~> 4.0)
     rexml (3.2.4)
     rubocop (0.80.1)
       jaro_winkler (~> 1.5.1)
@@ -45,6 +48,7 @@ DEPENDENCIES
   byebug (~> 11.1)
   dotenv (~> 2.7)
   rake (~> 13.0)
+  redis-objects (~> 1.5)
   rubocop (~> 0.80.1)
   virtus (~> 1.0)
 
