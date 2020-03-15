@@ -297,11 +297,6 @@ class Api
   end
 end
 
-# # https://huobiapi.github.io/docs/spot/v1/cn/#5ea2e0cde2
-
-# access_key = '40166dab-5b2f6f16-gr4edfki8l-fc3aa'
-# secret_key = 'ceca241f-78d75a34-909b2b07-524c6'
-# account_id = '12163165'
 
 # client = Api.new(access_key,secret_key,account_id)
 
