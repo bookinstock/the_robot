@@ -34,44 +34,45 @@ end
 puts "from #{klines.first.time} to #{klines.last.time}"
 
 
-
+#TODO show close price
+klines.each do |e|
+  puts e.close
+end
 
 
 #TODO find trend change point
 prev_trend = nil
 prev_kline = nil
 klines.each_with_index do |kline, idx|
-  if prev_kline
-    if prev_kline.close > kline.open
-      trend = :down
-    else
-      trend = :up
-    end
+  if prev_kline.nil?
+    prev_kline = kline
+    puts "start-#{kline.close}"
+    next
   end
 
+  if kline.close < prev_kline.close
+    trend = :down
+  else
+    trend = :up
+  end 
+  
   # trend not change
   msg =
-    if trend == prev_kline
-      if prev_trend == :down
-        "--up--#{kline.close}"
-      elsif prev_trend == :up
+    if trend == prev_trend
+      if trend == :down
         "--down--#{kline.close}"
+      elsif trend == :up
+        "--up--#{kline.close}"
       else
-        "!!!wtf"
+        "!!!wtf1"
       end
     else # trend change
-      if prev_trend == :down && trend == :up
+      if trend == :up
         "change!-up-#{kline.close}"
-      elsif prev_trend == :up && trend == :down
+      elsif trend == :down
         "change!-down-#{kline.close}"
       else
-        if prev_trend == nil
-          "start-#{kline.close}"
-        elsif trend == nil
-          "end-#{kline.close}"
-        else
-          "!!!wtf2"
-        end
+        "!!!wtf2"
       end
     end
 
