@@ -7,6 +7,21 @@ require './src/robot'
 require './src/api'
 require './src/init'
 
+access_key = ENV['ACCESS_KEY']
+secret_key = ENV['SECRET_KEY']
+account_id = ENV['ACCOUNT_ID']
+
+api = Api.new(access_key, secret_key, account_id)
+
+x = api.common_symbols
+
+data = x['data']
+
+data.find {|e| e['symbol']=='btcusdt'}
+
+x = api.market_klines("btcusdt")
+
+
 def main
   puts 'start'
 

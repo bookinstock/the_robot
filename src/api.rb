@@ -9,7 +9,13 @@ require 'base64'
 
 require 'byebug'
 
+require_relative 'apis/common'
+require_relative 'apis/market'
+
 class Api
+  include Apis::Common
+  include Apis::Market
+
   attr_accessor :access_key, :secret_key, :account_id
 
   def initialize(access_key, secret_key, account_id, signature_version = '2')
@@ -26,77 +32,7 @@ class Api
     }
   end
 
-  ## 获取交易对
-  def symbols
-    path = '/v1/common/symbols'
-    request_method = 'GET'
-    params = {}
-    util(path, params, request_method)
-  end
 
-  ## 获取市场深度
-  def depth(symbol, type = 'step0')
-    path = '/market/depth'
-    request_method = 'GET'
-    params = { 'symbol' => symbol, 'type' => type }
-    util(path, params, request_method)
-  end
-
-  ## K线数据
-  def history_kline(symbol, period, size = 150)
-    path = '/market/history/kline'
-    request_method = 'GET'
-    params = { 'symbol' => symbol, 'period' => period, 'size' => size }
-    util(path, params, request_method)
-  end
-
-  ## 获取聚合行情(Ticker)
-  def merged(symbol)
-    path = '/market/detail/merged'
-    request_method = 'GET'
-    params = { 'symbol' => symbol }
-    util(path, params, request_method)
-  end
-
-  ## 获取 Market Depth 数据
-  def market_trade(symbol)
-    path = '/market/depth'
-    request_method = 'GET'
-    params = { 'symbol' => symbol }
-    util(path, params, request_method)
-  end
-
-  ## 获取 Trade Detail 数据
-  def trade_detail(symbol)
-    path = '/market/trade'
-    request_method = 'GET'
-    params = { 'symbol' => symbol }
-    util(path, params, request_method)
-  end
-
-  ## 批量获取最近的交易记录
-  def history_trade(symbol, size = 1)
-    path = '/market/history/trade'
-    request_method = 'GET'
-    params = { 'symbol' => symbol, 'size' => size }
-    util(path, params, request_method)
-  end
-
-  ## 获取 Market Detail 24小时成交量数据
-  def market_detail(symbol)
-    path = '/market/detail'
-    request_method = 'GET'
-    params = { 'symbol' => symbol }
-    util(path, params, request_method)
-  end
-
-  ## 查询系统支持的所有币种
-  def currencys
-    path = '/v1/common/currencys'
-    request_method = 'GET'
-    params = {}
-    util(path, params, request_method)
-  end
 
   #---account
   ## 查询当前用户的所有账户(即account-id)
