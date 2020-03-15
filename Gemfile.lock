@@ -2,8 +2,18 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.0)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     byebug (11.1.1)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     dotenv (2.7.5)
+    equalizer (0.0.11)
+    ice_nine (0.11.2)
     jaro_winkler (1.5.4)
     parallel (1.19.1)
     parser (2.7.0.4)
@@ -20,7 +30,13 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
     ruby-progressbar (1.10.1)
+    thread_safe (0.3.6)
     unicode-display_width (1.6.1)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
 
 PLATFORMS
   ruby
@@ -30,6 +46,7 @@ DEPENDENCIES
   dotenv (~> 2.7)
   rake (~> 13.0)
   rubocop (~> 0.80.1)
+  virtus (~> 1.0)
 
 BUNDLED WITH
    2.1.4
