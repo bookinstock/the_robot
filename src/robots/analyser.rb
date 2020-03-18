@@ -8,10 +8,9 @@ module Robots
     #   end
     # end
 
-
     class Kline
-      attr_reader :klines, :start_kline, :turn_klines, 
-        :turn_up_klines, :turn_down_klines
+      attr_reader :klines, :start_kline, :turn_klines,
+                  :turn_up_klines, :turn_down_klines
 
       def initialize(klines)
         @klines = klines.reverse
@@ -30,12 +29,11 @@ module Robots
 
         turn_up_klines = []
 
-
         prev_trend = nil
         prev_kline = nil
         klines.reverse.each_with_index do |kline, idx|
           if prev_kline.nil?
-            "first"
+            'first'
             prev_kline = kline
             puts "-#{idx}:first-#{kline.close}"
 
@@ -57,7 +55,7 @@ module Robots
                   end
 
           if prev_trend.nil?
-            "second"
+            'second'
             prev_trend = trend
             msg = "--#{trend}--#{kline.close}"
             puts "-#{idx}:#{msg}"
@@ -94,7 +92,6 @@ module Robots
           prev_trend = trend
           prev_kline = kline
         end
-
       end
     end
   end

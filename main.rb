@@ -37,17 +37,12 @@ klines.reverse.each do |e|
   puts e.close
 end
 
-
-
-puts "------"
+puts '------'
 pp start_kline
-puts "------"
+puts '------'
 pp turn_down_klines
-puts "------"
+puts '------'
 pp turn_up_klines
-
-
-
 
 ### separate
 
