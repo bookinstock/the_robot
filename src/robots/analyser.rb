@@ -40,7 +40,7 @@ module Robots
         turn_klines = []
         turn_down_klines = []
         turn_up_klines = []
-        
+
         do_first_kline!(turn_klines, turn_down_klines, turn_up_klines)
         do_rest_klines!(turn_klines, turn_down_klines, turn_up_klines)
 
@@ -49,41 +49,41 @@ module Robots
 
       private
 
-        def do_first_kline!(turn_klines, turn_down_klines, turn_up_klines)
-          first_kline = @klines.first
+      def do_first_kline!(turn_klines, turn_down_klines, turn_up_klines)
+        first_kline = @klines.first
 
-          if first_kline.down?
-            turn_down_klines << first_kline
-          else
-            turn_up_klines << first_kline
-          end
-          turn_klines << first_kline
-
-          [turn_klines, turn_down_klines, turn_up_klines]
+        if first_kline.down?
+          turn_down_klines << first_kline
+        else
+          turn_up_klines << first_kline
         end
+        turn_klines << first_kline
 
-        def do_rest_klines!(turn_klines, turn_down_klines, turn_up_klines)
-          prev_kline = @klines.first
-          prev_trend = @klines.first.trend
+        [turn_klines, turn_down_klines, turn_up_klines]
+      end
 
-          @klines[1..-1].each do |kline|
-            trend = kline.trend_from(prev_kline)
+      def do_rest_klines!(turn_klines, turn_down_klines, turn_up_klines)
+        prev_kline = @klines.first
+        prev_trend = @klines.first.trend
 
-            if trend != prev_trend
-              if trend == :up
-                turn_up_klines << kline
-              elsif trend == :down
-                turn_down_klines << kline
-              end
-              turn_klines << kline
+        @klines[1..-1].each do |kline|
+          trend = kline.trend_from(prev_kline)
+
+          if trend != prev_trend
+            if trend == :up
+              turn_up_klines << kline
+            elsif trend == :down
+              turn_down_klines << kline
             end
-
-            prev_trend = trend
-            prev_kline = kline
+            turn_klines << kline
           end
 
-          [turn_klines, turn_down_klines, turn_up_klines]
+          prev_trend = trend
+          prev_kline = kline
         end
+
+        [turn_klines, turn_down_klines, turn_up_klines]
+      end
     end
   end
 end

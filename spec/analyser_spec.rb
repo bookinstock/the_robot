@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'byebug'
 require_relative 'spec_helper'
 require_relative '../src/models/kline'
@@ -89,8 +90,6 @@ RSpec.describe 'analyser' do
                 'vol' => 3_420_375.8741301564 }]
 
       @klines = data.map { |e| Models::Kline.new(e) }
-
-      
     end
 
     it 'find trun_klines' do
