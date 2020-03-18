@@ -17,3 +17,5 @@ gem 'rubocop', '~> 0.80.1'
 gem 'virtus', '~> 1.0'
 
 gem 'redis-objects', '~> 1.5'
+
+gem "rspec", "~> 3.9"
