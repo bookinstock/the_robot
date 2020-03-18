@@ -21,7 +21,7 @@ api = Api.new(access_key, secret_key, account_id)
 
 # default => symbol='btcusdt', period='15min', size = 100
 klines = api.market_klines
-
+debugger
 # store in redis
 list = Redis::List.new('klans', marshal: true)
 list.clear
@@ -29,54 +29,25 @@ klines.each do |kline|
   list << kline
 end
 
-puts "from #{klines.first.time} to #{klines.last.time}"
+puts "from #{klines.last.time}"
+puts "to #{klines.first.time}"
 
 # TODO: show close price
-klines.each do |e|
+klines.reverse.each do |e|
   puts e.close
 end
 
-# TODO: find trend change point
-prev_trend = nil
-prev_kline = nil
-klines.each_with_index do |kline, idx|
-  if prev_kline.nil?
-    prev_kline = kline
-    puts "start-#{kline.close}"
-    next
-  end
 
-  trend = if kline.close < prev_kline.close
-            :down
-          else
-            :up
-          end
 
-  # trend not change
-  msg =
-    if trend == prev_trend
-      if trend == :down
-        "--down--#{kline.close}"
-      elsif trend == :up
-        "--up--#{kline.close}"
-      else
-        '!!!wtf1'
-      end
-    else # trend change
-      if trend == :up
-        "change!-up-#{kline.close}"
-      elsif trend == :down
-        "change!-down-#{kline.close}"
-      else
-        '!!!wtf2'
-      end
-    end
+puts "------"
+pp start_kline
+puts "------"
+pp turn_down_klines
+puts "------"
+pp turn_up_klines
 
-  puts "-#{idx}:#{msg}"
 
-  prev_trend = trend
-  prev_kline = kline
-end
+
 
 ### separate
 
