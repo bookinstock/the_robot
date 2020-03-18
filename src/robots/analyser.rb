@@ -9,90 +9,81 @@ module Robots
     # end
 
     class Kline
-      attr_reader :klines, :start_kline, :turn_klines,
-                  :turn_up_klines, :turn_down_klines
+      attr_reader :klines
 
       def initialize(klines)
         @klines = klines.reverse
+        @klines.each.with_index do |kline, idx|
+          kline.idx = idx
+        end
       end
 
       def show_close_prices
-        @klines.each do |e|
-          puts e.close
+        @klines.each do |kline|
+          puts kline.close
         end
+      end
+
+      def show_open_prices
+        @klines.each do |kline|
+          puts kline.open
+        end
+      end
+
+      def empty?
+        @klines.empty?
       end
 
       def execute
-        start_kline = nil
+        return if empty?
 
+        turn_klines = []
         turn_down_klines = []
-
         turn_up_klines = []
+        
+        do_first_kline!(turn_klines, turn_down_klines, turn_up_klines)
+        do_rest_klines!(turn_klines, turn_down_klines, turn_up_klines)
 
-        prev_trend = nil
-        prev_kline = nil
-        klines.reverse.each_with_index do |kline, idx|
-          if prev_kline.nil?
-            'first'
-            prev_kline = kline
-            puts "-#{idx}:first-#{kline.close}"
-
-            start_kline = kline
-
-            if start_kline.open < start_kline.close
-              turn_down_klines << [idx, kline]
-            else
-              turn_up_klines << [idx, kline]
-            end
-
-            next
-          end
-
-          trend = if kline.close < prev_kline.close
-                    :down
-                  else
-                    :up
-                  end
-
-          if prev_trend.nil?
-            'second'
-            prev_trend = trend
-            msg = "--#{trend}--#{kline.close}"
-            puts "-#{idx}:#{msg}"
-
-            next
-          end
-
-          # trend not change
-          msg =
-            if trend == prev_trend
-              if trend == :down
-                "--down--#{kline.close}"
-              elsif trend == :up
-                "--up--#{kline.close}"
-              else
-                '!!!wtf1'
-              end
-            else # trend change
-              if trend == :up
-                "change!-up-#{kline.close}"
-
-                turn_up_klines << [idx, kline]
-              elsif trend == :down
-                "change!-down-#{kline.close}"
-
-                turn_down_klines << [idx, kline]
-              else
-                '!!!wtf2'
-              end
-            end
-
-          puts "-#{idx}:#{msg}"
-
-          prev_trend = trend
-          prev_kline = kline
-        end
+        [turn_klines, turn_down_klines, turn_up_klines]
       end
+
+      private
+
+        def do_first_kline!(turn_klines, turn_down_klines, turn_up_klines)
+          first_kline = @klines.first
+
+          if first_kline.down?
+            turn_down_klines << first_kline
+          else
+            turn_up_klines << first_kline
+          end
+          turn_klines << first_kline
+
+          [turn_klines, turn_down_klines, turn_up_klines]
+        end
+
+        def do_rest_klines!(turn_klines, turn_down_klines, turn_up_klines)
+          prev_kline = @klines.first
+          prev_trend = @klines.first.trend
+
+          @klines[1..-1].each do |kline|
+            trend = kline.trend_from(prev_kline)
+
+            if trend != prev_trend
+              if trend == :up
+                turn_up_klines << kline
+              elsif trend == :down
+                turn_down_klines << kline
+              end
+              turn_klines << kline
+            end
+
+            prev_trend = trend
+            prev_kline = kline
+          end
+
+          [turn_klines, turn_down_klines, turn_up_klines]
+        end
     end
   end
 end

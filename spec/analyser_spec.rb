@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'byebug'
 require_relative 'spec_helper'
 require_relative '../src/models/kline'
 require_relative '../src/robots/analyser'
@@ -90,27 +90,18 @@ RSpec.describe 'analyser' do
 
       @klines = data.map { |e| Models::Kline.new(e) }
 
-      @analyser = Robots::Analyser::Kline.new(@klines)
-
-      @analyser.execute
+      
     end
 
     it 'find trun_klines' do
-      turn_klines = @analyser.turn_klines
+      @analyser = Robots::Analyser::Kline.new(@klines)
 
-      expect(turn_klines.size).to eq 1
-    end
+      turn_klines, turn_down_klines, turn_up_klines = @analyser.execute
 
-    it 'find turn_down_klines' do
-      turn_up_klines = @analyser.turn_down_klines
-
-      expect(turn_up_klines.size).to eq 1
-    end
-
-    it 'find turn_up_klines' do
-      turn_up_klines = @analyser.turn_up_klines
-
-      expect(turn_up_klines.size).to eq 1
+      expect(turn_klines.size).to eq 6
+      expect(turn_down_klines.size).to eq 3
+      expect(turn_up_klines.size).to eq 3
+      # todo
     end
   end
 end

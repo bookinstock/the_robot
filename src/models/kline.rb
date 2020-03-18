@@ -6,6 +6,8 @@ module Models
   class Kline
     include Virtus.model
 
+    attr_accessor :idx
+
     attribute :id, Integer
     attribute :open, Float
     attribute :close, Float
@@ -17,6 +19,30 @@ module Models
 
     def time
       Time.at(id)
+    end
+
+    def up?
+      open < close
+    end
+
+    def down?
+      !up?
+    end
+
+    def trend
+      if up?
+        :up
+      else
+        :down
+      end
+    end
+
+    def trend_from(prev)
+      if prev.close > close
+        :down
+      else
+        :up
+      end
     end
   end
 end
