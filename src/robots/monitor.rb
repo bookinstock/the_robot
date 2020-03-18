@@ -2,7 +2,7 @@
 
 module Robots
   class Monitor
-    def initializer(api)
+    def initialize(api)
       @api = api
     end
 

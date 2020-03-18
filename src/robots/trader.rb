@@ -2,7 +2,7 @@
 
 module Robots
   class Trader
-    def initializer(api)
+    def initialize(api)
       @api = api
     end
 
