@@ -95,12 +95,13 @@ RSpec.describe 'analyser' do
     it 'find trun_klines' do
       @analyser = Robots::Analyser::Kline.new(@klines)
 
+      # @analyser.show_close_prices
+
       turn_klines, turn_down_klines, turn_up_klines = @analyser.execute
 
-      expect(turn_klines.size).to eq 6
-      expect(turn_down_klines.size).to eq 3
-      expect(turn_up_klines.size).to eq 3
-      # todo
+      expect(turn_klines.map(&:close)).to eq [5127.22, 5113.81, 5160.09, 5330.88, 5363.02, 5324.98]
+      expect(turn_down_klines.map(&:close)).to eq [5113.81, 5330.88, 5324.98]
+      expect(turn_up_klines.map(&:close)).to eq [5127.22, 5160.09, 5363.02]
     end
   end
 end
