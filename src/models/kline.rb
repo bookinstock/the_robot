@@ -44,6 +44,10 @@ module Models
         :up
       end
     end
+
+    def gradient_from(prev)
+      (open - prev.open) / (idx - prev.idx)
+    end
   end
 end
 
