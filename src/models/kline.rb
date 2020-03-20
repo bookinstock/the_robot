@@ -46,7 +46,8 @@ module Models
     end
 
     def gradient_from(prev)
-      (open - prev.open) / (idx - prev.idx)
+      ratio = (open - prev.open) / (idx - prev.idx)
+      ratio.abs
     end
   end
 end

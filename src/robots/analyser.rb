@@ -3,51 +3,116 @@
 module Robots
   module Analyser
     class TrendLine
-      class Stack
-        def initalize()
-          @inner = []
-        end
-
-        def push(e)
-          @inner.push e
-        end
-
-        def pop
-          @inner.pop
-        end
-
-        def at(idx)
-          @inner.at idx
-        end
-
-        def all
-          @inners
-        end
-      end
-
       attr_reader :down_stack, :up_stack
 
       def initialize(kline_result)
         @kline_result = kline_result
-        @down_stack = Stack.new
-        @up_stack = Stack.new
+        @down_stack = []
+        @up_stack = []
       end
 
+      # down down down
       def go_down
         klines = @kline_result.turn_down_klines
-        @down_stack.push(klines.first)
-        klines[1..-1].each do |kline|
-          # @down_stack
-          # kline 
-          # gradient_from
-        end
-         
-          
+        @down_stack << klines.first
 
+        puts "--#{klines.first.idx}=#{klines.first.open}"
+
+        klines[1..-1].each do |kline|
+
+          go_down_recursion(kline)
+        end
+
+        @down_stack
       end
 
+      # up up up
       def go_up
+        klines = @kline_result.turn_up_klines
+        @up_stack << klines.first
 
+        puts "--#{klines.first.idx}=#{klines.first.open}"
+
+        klines[1..-1].each do |kline|
+
+          go_up_recursion(kline)
+        end
+
+        @up_stack
+      end
+
+      private
+
+      def go_down_recursion(kline)
+        puts "--#{kline.idx}=#{kline.open}"
+
+        if @down_stack.size.zero?
+          raise('down_stack size can not be zero!!!')
+        end
+
+        # when only 1 element in the stack
+        if @down_stack.size == 1
+          if kline.open > @down_stack.first.open
+            k = @down_stack.pop
+            puts "逆转: #{k.open}->#{kline.open}"
+            @down_stack << kline
+            # 趋势完全突破
+          else
+            @down_stack << kline
+          end
+          return 
+        end
+
+        if @down_stack.size > 1
+          prev_gradient = @down_stack[-1].gradient_from(kline)
+          curr_gradient = @down_stack[-2].gradient_from(kline)
+
+          if curr_gradient > prev_gradient 
+            @down_stack << kline
+            return 
+          else
+            k = @down_stack.pop
+            puts "突破: #{k.open}->#{kline.open}"
+            
+            go_down_recursion(kline)
+          end
+        end
+      end
+
+      def go_up_recursion(kline)
+        puts "--#{kline.idx}=#{kline.open}"
+
+        if @up_stack.size.zero?
+          raise('up_stack size can not be zero!!!')
+        end
+
+        # when only 1 element in the stack
+        if @up_stack.size == 1
+          if kline.open <= @up_stack.first.open
+            k = @up_stack.pop
+            puts "逆转: #{k.open}->#{kline.open}"
+            @up_stack << kline
+            # 趋势完全突破
+          else
+            @up_stack << kline
+          end
+          return 
+        end
+
+        if @up_stack.size > 1
+          prev_gradient = @up_stack[-1].gradient_from(kline)
+          curr_gradient = @up_stack[-2].gradient_from(kline)
+
+          if curr_gradient <= prev_gradient 
+            @up_stack << kline
+            return 
+          else
+            k = @up_stack.pop
+            puts "突破: #{k.open}->#{kline.open}(prev=#{prev_gradient},current=#{curr_gradient})"
+            
+            go_up_recursion(kline)
+          end
+        end
       end
     end
 
