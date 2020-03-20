@@ -12,6 +12,7 @@ end
 require './src/robot'
 require './src/api'
 require './src/init'
+require './src/robots/analyser'
 
 access_key = ENV['ACCESS_KEY']
 secret_key = ENV['SECRET_KEY']
@@ -20,8 +21,10 @@ account_id = ENV['ACCOUNT_ID']
 api = Api.new(access_key, secret_key, account_id)
 
 # default => symbol='btcusdt', period='15min', size = 100
+puts "start market_klines..."
 klines = api.market_klines
-debugger
+puts "end market_klines..."
+
 # store in redis
 list = Redis::List.new('klans', marshal: true)
 list.clear
@@ -32,56 +35,72 @@ end
 puts "from #{klines.last.time}"
 puts "to #{klines.first.time}"
 
-# TODO: show close price
-klines.reverse.each do |e|
-  puts e.close
-end
+a = Robots::Analyser::Trend.new(klines.reverse)
 
-puts '------'
-pp start_kline
-puts '------'
-pp turn_down_klines
-puts '------'
-pp turn_up_klines
+a.execute
 
-### separate
 
-def main
-  puts 'start'
 
-  puts 'init'
-  puts 'load env...'
-  access_key = ENV['ACCESS_KEY']
-  secret_key = ENV['SECRET_KEY']
-  account_id = ENV['ACCOUNT_ID']
+# kline_analyser = Robots::Analyser::Kline.new(klines)
+# kline_result = kline_analyser.execute
+# kline_analyser.show_open_prices
 
-  puts '======'
-  puts "ACCESS_KEY=#{access_key}"
-  puts "SECRET_KEY=#{secret_key}"
-  puts "account_id=#{account_id}"
-  puts '======'
+# trend_line = Robots::Analyser::TrendLine.new(kline_result)
 
-  if account_id
-    api = Api.new(access_key, secret_key, account_id)
-  else
-    init = Init.new(access_key, secret_key)
-    api = init.execute
-  end
+# puts '---go down---'
+# down_stack = trend_line.go_down
+# puts ""
 
-  # accountmodule
-  # accounts
+# puts '---go up---'
+# up_stack = trend_line.go_up
+# puts ""
 
-  # balances
+# puts '---down stack---'
+# down_stack.each { |k| puts k.open }
+# puts ""
 
-  # history
+# puts '---up stack---'
+# up_stack.each { |k| puts k.open }
+# puts ""
 
-  debugger
+# ### separate
 
-  # api.symbols
-  # {"base-currency"=>"pay", "quote-currency"=>"eth", "price-precision"=>8, "amount-precision"=>2, "symbol-partition"=>"innovation", "symbol"=>"payeth", "state"=>"online", "value-precision"=>8, "min-order-amt"=>0.1, "max-order-amt"=>500000, "min-order-value"=>0.01}
+# def main
+#   puts 'start'
 
-  puts 'end'
-end
+#   puts 'init'
+#   puts 'load env...'
+#   access_key = ENV['ACCESS_KEY']
+#   secret_key = ENV['SECRET_KEY']
+#   account_id = ENV['ACCOUNT_ID']
+
+#   puts '======'
+#   puts "ACCESS_KEY=#{access_key}"
+#   puts "SECRET_KEY=#{secret_key}"
+#   puts "account_id=#{account_id}"
+#   puts '======'
+
+#   if account_id
+#     api = Api.new(access_key, secret_key, account_id)
+#   else
+#     init = Init.new(access_key, secret_key)
+#     api = init.execute
+#   end
+
+#   # accountmodule
+#   # accounts
+
+#   # balances
+
+#   # history
+
+#   debugger
+
+#   # api.symbols
+#   # {"base-currency"=>"pay", "quote-currency"=>"eth", "price-precision"=>8, "amount-precision"=>2, "symbol-partition"=>"innovation", "symbol"=>"payeth", "state"=>"online", "value-precision"=>8, "min-order-amt"=>0.1, "max-order-amt"=>500000, "min-order-value"=>0.01}
+
+#   puts 'end'
+# end
 
 # main
 

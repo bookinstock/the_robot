@@ -2,6 +2,41 @@
 
 module Robots
   module Analyser
+    class Trend
+      def initialize(klines)
+        @klines = klines
+      end
+
+      def execute
+        prev = @klines.first
+
+        @klines[1..-1].each do |kline|
+          puts "#{kline.time}-(#{kline.open}~#{kline.close})"
+          if prev.up?
+            if kline.close > prev.open
+              # puts :trend_keep_up
+              puts "拿住"
+            else
+              # puts :trend_turn_down
+              puts "卖"
+            end
+          else
+            if kline.close < prev.open
+              # puts :trend_keep_down
+              puts "忍住"
+            else
+              # puts :trend_turn_up
+              puts "买"
+            end
+          end
+        end
+      end
+
+      def update(kline)
+
+      end
+    end
+
     class TrendLine
       attr_reader :down_stack, :up_stack
 
@@ -30,7 +65,7 @@ module Robots
         klines = @kline_result.turn_up_klines
         @up_stack << klines.first
 
-        puts "--#{klines.first.idx}=#{klines.first.open}"
+        puts "-【#{klines.first.time}】-#{klines.first.idx}=#{klines.first.open}"
 
         klines[1..-1].each do |kline|
           go_up_recursion(kline)
@@ -42,7 +77,7 @@ module Robots
       private
 
       def go_down_recursion(kline)
-        puts "--#{kline.idx}=#{kline.open}"
+        puts "-【#{kline.time}】-#{kline.idx}=#{kline.open}"
 
         raise('down_stack size can not be zero!!!') if @down_stack.size.zero?
 
@@ -50,7 +85,7 @@ module Robots
         if @down_stack.size == 1
           if kline.open > @down_stack.first.open
             k = @down_stack.pop
-            puts "逆转: #{k.open}->#{kline.open}"
+            puts "下降趋势逆转逆转:#{k.open}->#{kline.open}"
             @down_stack << kline
             # 趋势完全突破
           else
@@ -68,7 +103,7 @@ module Robots
             nil
           else
             k = @down_stack.pop
-            puts "突破: #{k.open}->#{kline.open}"
+            puts "下降趋势线更新:#{k.open}->#{kline.open}(prev=#{prev_gradient},current=#{curr_gradient})"
 
             go_down_recursion(kline)
           end
@@ -84,7 +119,7 @@ module Robots
         if @up_stack.size == 1
           if kline.open <= @up_stack.first.open
             k = @up_stack.pop
-            puts "逆转: #{k.open}->#{kline.open}"
+            puts "上升趋势逆转:#{k.open}->#{kline.open}"
             @up_stack << kline
             # 趋势完全突破
           else
@@ -102,7 +137,7 @@ module Robots
             nil
           else
             k = @up_stack.pop
-            puts "突破: #{k.open}->#{kline.open}(prev=#{prev_gradient},current=#{curr_gradient})"
+            puts "下降趋势线更新:#{k.open}->#{kline.open}(prev=#{prev_gradient},current=#{curr_gradient})"
 
             go_up_recursion(kline)
           end

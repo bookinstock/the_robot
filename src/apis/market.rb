@@ -21,7 +21,7 @@ module Apis
     # symbol => btcusdt, ethbtc...
     # period => 1min, 5min, 15min, 30min, 60min, 4hour, 1day, 1mon, 1week, 1year
     # size => 0..2000
-    def market_klines(symbol = 'btcusdt', period = '15min', size = 10)
+    def market_klines(symbol = 'btcusdt', period = '15min', size = 100)
       path = '/market/history/kline'
       request_method = 'GET'
       params = { 'symbol' => symbol, 'period' => period, 'size' => size }
