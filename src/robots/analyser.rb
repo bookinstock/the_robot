@@ -19,7 +19,6 @@ module Robots
         puts "--#{klines.first.idx}=#{klines.first.open}"
 
         klines[1..-1].each do |kline|
-
           go_down_recursion(kline)
         end
 
@@ -34,7 +33,6 @@ module Robots
         puts "--#{klines.first.idx}=#{klines.first.open}"
 
         klines[1..-1].each do |kline|
-
           go_up_recursion(kline)
         end
 
@@ -46,9 +44,7 @@ module Robots
       def go_down_recursion(kline)
         puts "--#{kline.idx}=#{kline.open}"
 
-        if @down_stack.size.zero?
-          raise('down_stack size can not be zero!!!')
-        end
+        raise('down_stack size can not be zero!!!') if @down_stack.size.zero?
 
         # when only 1 element in the stack
         if @down_stack.size == 1
@@ -60,20 +56,20 @@ module Robots
           else
             @down_stack << kline
           end
-          return 
+          return
         end
 
         if @down_stack.size > 1
           prev_gradient = @down_stack[-1].gradient_from(kline)
           curr_gradient = @down_stack[-2].gradient_from(kline)
 
-          if curr_gradient > prev_gradient 
+          if curr_gradient > prev_gradient
             @down_stack << kline
-            return 
+            nil
           else
             k = @down_stack.pop
             puts "突破: #{k.open}->#{kline.open}"
-            
+
             go_down_recursion(kline)
           end
         end
@@ -82,9 +78,7 @@ module Robots
       def go_up_recursion(kline)
         puts "--#{kline.idx}=#{kline.open}"
 
-        if @up_stack.size.zero?
-          raise('up_stack size can not be zero!!!')
-        end
+        raise('up_stack size can not be zero!!!') if @up_stack.size.zero?
 
         # when only 1 element in the stack
         if @up_stack.size == 1
@@ -96,20 +90,20 @@ module Robots
           else
             @up_stack << kline
           end
-          return 
+          return
         end
 
         if @up_stack.size > 1
           prev_gradient = @up_stack[-1].gradient_from(kline)
           curr_gradient = @up_stack[-2].gradient_from(kline)
 
-          if curr_gradient <= prev_gradient 
+          if curr_gradient <= prev_gradient
             @up_stack << kline
-            return 
+            nil
           else
             k = @up_stack.pop
             puts "突破: #{k.open}->#{kline.open}(prev=#{prev_gradient},current=#{curr_gradient})"
-            
+
             go_up_recursion(kline)
           end
         end
@@ -123,7 +117,7 @@ module Robots
         attr_accessor :turn_klines, :turn_down_klines, :turn_up_klines
 
         def ready?
-          not turn_klines.empty?
+          !turn_klines.empty?
         end
       end
 

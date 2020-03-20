@@ -103,7 +103,6 @@ RSpec.describe 'analyser' do
       expect(result.turn_up_klines.map(&:close)).to eq [5127.22, 5160.09, 5363.02]
     end
 
-
     it 'down trend line' do
       @analyser = Robots::Analyser::Kline.new(@klines)
       result = @analyser.execute
@@ -111,16 +110,16 @@ RSpec.describe 'analyser' do
 
       trend_line = Robots::Analyser::TrendLine.new(result)
 
-      puts "---go down---"
-      down_stack = trend_line.go_down()
+      puts '---go down---'
+      down_stack = trend_line.go_down
 
-      puts "---go up---"
-      up_stack = trend_line.go_up()
-      
-      puts "---down stack---"
+      puts '---go up---'
+      up_stack = trend_line.go_up
+
+      puts '---down stack---'
       down_stack.each { |k| puts k.open }
 
-      puts "---up stack---"
+      puts '---up stack---'
       up_stack.each { |k| puts k.open }
 
       expect(true).to eq true
