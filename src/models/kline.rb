@@ -51,13 +51,11 @@ module Models
     # end
 
     def ratio_close(prev_k)
-      ratio = (close - prev_k.open) / (idx - prev_k.idx)
-      ratio.abs
+      (close - prev_k.open) / (idx - prev_k.idx)
     end
 
     def ratio_open(prev_k)
-      ratio = (open - prev_k.open) / (idx - prev_k.idx)
-      ratio.abs
+      (open - prev_k.open) / (idx - prev_k.idx)
     end
   end
 

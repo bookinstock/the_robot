@@ -102,7 +102,7 @@ module Robots
         if down_stack.size == 1 && (down_stack[0].open < k.close)
           down_stack.pop
           break_count
-        elsif down_stack.size > 1 && (k.ratio_close(down_stack[-2]) < down_stack[-1].ratio_open(down_stack[-2]))
+        elsif down_stack.size > 1 && (k.ratio_close(down_stack[-2]) > down_stack[-1].ratio_open(down_stack[-2]))
           down_stack.pop
           check_down_stack(k, down_stack, break_count+1)
         else
