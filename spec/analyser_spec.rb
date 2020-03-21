@@ -271,20 +271,20 @@ RSpec.describe 'analyser' do
       it 'up up up up' do
         raw_klines = [
           {
-            "open"=>1,
-            "close"=>2
+            'open' => 1,
+            'close' => 2
           },
           {
-            "open"=>2,
-            "close"=>4
+            'open' => 2,
+            'close' => 4
           },
           {
-            "open"=>3,
-            "close"=>4
+            'open' => 3,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>5
+            'open' => 4,
+            'close' => 5
           }
         ]
 
@@ -292,7 +292,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
 
         expect(results).to eq []
       end
@@ -300,20 +300,20 @@ RSpec.describe 'analyser' do
       it 'down down down down' do
         raw_klines = [
           {
-            "open"=>5,
-            "close"=>4
+            'open' => 5,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>3
+            'open' => 4,
+            'close' => 3
           },
           {
-            "open"=>3,
-            "close"=>3
+            'open' => 3,
+            'close' => 3
           },
           {
-            "open"=>3,
-            "close"=>1
+            'open' => 3,
+            'close' => 1
           }
         ]
 
@@ -321,7 +321,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
 
         expect(results).to eq []
       end
@@ -329,20 +329,20 @@ RSpec.describe 'analyser' do
       it 'little down in ups' do
         raw_klines = [
           {
-            "open"=>1,
-            "close"=>2
+            'open' => 1,
+            'close' => 2
           },
           {
-            "open"=>2,
-            "close"=>4
+            'open' => 2,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>3
+            'open' => 4,
+            'close' => 3
           },
           {
-            "open"=>3,
-            "close"=>5
+            'open' => 3,
+            'close' => 5
           }
         ]
 
@@ -350,7 +350,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
 
         expect(results).to eq []
       end
@@ -358,20 +358,20 @@ RSpec.describe 'analyser' do
       it 'little up in downs' do
         raw_klines = [
           {
-            "open"=>5,
-            "close"=>3
+            'open' => 5,
+            'close' => 3
           },
           {
-            "open"=>3,
-            "close"=>4
+            'open' => 3,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>3
+            'open' => 4,
+            'close' => 3
           },
           {
-            "open"=>3,
-            "close"=>2
+            'open' => 3,
+            'close' => 2
           }
         ]
 
@@ -379,7 +379,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
 
         expect(results).to eq []
       end
@@ -387,20 +387,20 @@ RSpec.describe 'analyser' do
       it 'two little downs in ups' do
         raw_klines = [
           {
-            "open"=>1,
-            "close"=>5
+            'open' => 1,
+            'close' => 5
           },
           {
-            "open"=>5,
-            "close"=>4
+            'open' => 5,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>3
+            'open' => 4,
+            'close' => 3
           },
           {
-            "open"=>3,
-            "close"=>6
+            'open' => 3,
+            'close' => 6
           }
         ]
 
@@ -408,7 +408,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
 
         expect(results).to eq []
       end
@@ -416,20 +416,20 @@ RSpec.describe 'analyser' do
       it 'two little ups in downs' do
         raw_klines = [
           {
-            "open"=>6,
-            "close"=>3
+            'open' => 6,
+            'close' => 3
           },
           {
-            "open"=>3,
-            "close"=>4
+            'open' => 3,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>5
+            'open' => 4,
+            'close' => 5
           },
           {
-            "open"=>5,
-            "close"=>2
+            'open' => 5,
+            'close' => 2
           }
         ]
 
@@ -437,7 +437,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
 
         expect(results).to eq []
       end
@@ -445,20 +445,20 @@ RSpec.describe 'analyser' do
       it 'two downs in ups' do
         raw_klines = [
           {
-            "open"=>2,
-            "close"=>5
+            'open' => 2,
+            'close' => 5
           },
           {
-            "open"=>5,
-            "close"=>4
+            'open' => 5,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>2
+            'open' => 4,
+            'close' => 2
           },
           {
-            "open"=>2,
-            "close"=>3
+            'open' => 2,
+            'close' => 3
           }
         ]
 
@@ -466,7 +466,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
         r1 = results.first
 
         expect(results.size).to eq 1
@@ -477,20 +477,20 @@ RSpec.describe 'analyser' do
       it 'two ups in downs' do
         raw_klines = [
           {
-            "open"=>6,
-            "close"=>3
+            'open' => 6,
+            'close' => 3
           },
           {
-            "open"=>3,
-            "close"=>4
+            'open' => 3,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>6
+            'open' => 4,
+            'close' => 6
           },
           {
-            "open"=>6,
-            "close"=>5
+            'open' => 6,
+            'close' => 5
           }
         ]
 
@@ -498,7 +498,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
         r1 = results.first
 
         expect(results.size).to eq 1
@@ -509,20 +509,20 @@ RSpec.describe 'analyser' do
       it 'two big downs in ups' do
         raw_klines = [
           {
-            "open"=>2,
-            "close"=>5
+            'open' => 2,
+            'close' => 5
           },
           {
-            "open"=>5,
-            "close"=>4
+            'open' => 5,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>1
+            'open' => 4,
+            'close' => 1
           },
           {
-            "open"=>1,
-            "close"=>3
+            'open' => 1,
+            'close' => 3
           }
         ]
 
@@ -530,7 +530,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
         r1 = results.first
 
         expect(results.size).to eq 1
@@ -541,20 +541,20 @@ RSpec.describe 'analyser' do
       it 'two big ups in downs' do
         raw_klines = [
           {
-            "open"=>6,
-            "close"=>3
+            'open' => 6,
+            'close' => 3
           },
           {
-            "open"=>3,
-            "close"=>4
+            'open' => 3,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>7
+            'open' => 4,
+            'close' => 7
           },
           {
-            "open"=>7,
-            "close"=>5
+            'open' => 7,
+            'close' => 5
           }
         ]
 
@@ -562,7 +562,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
         r1 = results.first
 
         expect(results.size).to eq 1
@@ -573,20 +573,20 @@ RSpec.describe 'analyser' do
       it 'up down up down' do
         raw_klines = [
           {
-            "open"=>3,
-            "close"=>5
+            'open' => 3,
+            'close' => 5
           },
           {
-            "open"=>5,
-            "close"=>2
+            'open' => 5,
+            'close' => 2
           },
           {
-            "open"=>2,
-            "close"=>6
+            'open' => 2,
+            'close' => 6
           },
           {
-            "open"=>6,
-            "close"=>1
+            'open' => 6,
+            'close' => 1
           }
         ]
 
@@ -594,7 +594,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
         r1, r2, r3 = results
 
         expect(results.size).to eq 3
@@ -609,20 +609,20 @@ RSpec.describe 'analyser' do
       it 'down up down up' do
         raw_klines = [
           {
-            "open"=>5,
-            "close"=>4
+            'open' => 5,
+            'close' => 4
           },
           {
-            "open"=>4,
-            "close"=>6
+            'open' => 4,
+            'close' => 6
           },
           {
-            "open"=>6,
-            "close"=>2
+            'open' => 6,
+            'close' => 2
           },
           {
-            "open"=>2,
-            "close"=>10
+            'open' => 2,
+            'close' => 10
           }
         ]
 
@@ -630,7 +630,7 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        results = analyser.execute()
+        results = analyser.execute
         r1, r2, r3 = results
 
         expect(results.size).to eq 3
