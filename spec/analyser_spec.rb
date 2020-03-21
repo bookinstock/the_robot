@@ -1216,6 +1216,48 @@ RSpec.describe 'analyser' do
     end
   end
 
+  describe 'strategy 3' do
+    describe 'only one kline' do
+      it 'one up' do
+        raw_klines = [
+          {
+            'open' => 1,
+            'close' => 2
+          }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+
+        analyser = Robots::Analyser::Strategy3.new(klines)
+
+        results = analyser.execute
+
+        expect(results).to eq []
+      end
+    end
+  end
+
+  # describe 'strategy 4' do
+  #   describe 'only one kline' do
+  #     it 'one up' do
+  #       raw_klines = [
+  #         {
+  #           'open' => 1,
+  #           'close' => 2
+  #         }
+  #       ]
+
+  #       klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+
+  #       analyser = Robots::Analyser::Strategy4.new(klines)
+
+  #       results = analyser.execute
+
+  #       expect(results).to eq []
+  #     end
+  #   end
+  # end
+
   # context 'klines' do
   #   before(:example) do
   #     data = [{ 'amount' => 619.3034099946908,
