@@ -50,6 +50,19 @@ module Models
       ratio.abs
     end
   end
+
+  class KlinesBuilder
+    def initialize(raw_klines)
+      @raw_klines = raw_klines
+    end
+
+    def execute
+      klines = @raw_klines.map { |e| Models::Kline.new(e) }
+      klines = klines.reverse
+      klines.each_with_index { |k, idx| k.idx = idx }
+      klines
+    end
+  end
 end
 
 # {"amount"=>12.34164194163555,
