@@ -17,7 +17,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -34,7 +34,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -58,7 +58,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -79,7 +79,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -100,7 +100,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -121,7 +121,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -142,7 +142,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -163,7 +163,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -184,7 +184,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -208,7 +208,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -232,7 +232,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -256,7 +256,7 @@ RSpec.describe 'analyser' do
           }
         ]
 
-        klines = Models::KlinesBuilder.new(raw_klines).execute
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -290,7 +290,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -319,7 +319,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -348,7 +348,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -377,7 +377,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -406,7 +406,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -435,7 +435,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -464,7 +464,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -496,7 +496,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -528,7 +528,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -560,7 +560,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -592,7 +592,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -628,7 +628,7 @@ RSpec.describe 'analyser' do
     #       }
     #     ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -729,7 +729,7 @@ RSpec.describe 'analyser' do
   #               'low' => 5090.01,
   #               'vol' => 3_420_375.8741301564 }]
 
-  #     @klines = Models::KlinesBuilder.new(data).execute
+  #     @klines = Models::KlinesBuilder.new(data).execute(reverse: false)
 
 
   #   end

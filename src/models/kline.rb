@@ -56,9 +56,9 @@ module Models
       @raw_klines = raw_klines
     end
 
-    def execute
+    def execute(reverse: true)
       klines = @raw_klines.map { |e| Models::Kline.new(e) }
-      klines = klines.reverse
+      klines = klines.reverse if reverse
       klines.each_with_index { |k, idx| k.idx = idx }
       klines
     end
