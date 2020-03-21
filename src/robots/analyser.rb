@@ -40,6 +40,8 @@ module Robots
         results
       end
 
+      private
+
       def first_k
         @klines.first
       end
@@ -54,7 +56,67 @@ module Robots
         @klines = klines
       end
 
-      def execute; end
+      def execute
+        results = []
+        down_stack = []
+        up_stack = []
+
+        prev_k = first_k
+
+        rest_ks.each do |k|
+          if prev_k.up?
+            if k.up?
+              pop_count = check_down_stack(k, down_stack)
+              results << Result.new(k, :buy) if pop_count > 0
+            else
+              down_stack << k
+            end
+          else
+            if k.up?
+              up_stack << k
+            else
+              pop_count = check_up_stack(k, up_stack)
+              results << Result.new(k, :sell) if pop_count > 0
+            end
+          end
+        end
+
+        results
+      end
+
+      private
+
+      def first_k
+        @klines.first
+      end
+
+      def rest_ks
+        @klines[1..-1]
+      end
+
+      def check_down_stack(k, down_stack, pop_count=0)
+        if down_stack.size == 1 && (down_stack[0].open < k.open)
+          down_stack.pop
+          check_down_stack(k, down_stack, pop_count+1)
+        elsif down_stack.size > 1 && (k.ratio_from(down_stack[-2]) > k.ratio_from(down_stack[-1]))
+          down_stack.pop
+          check_down_stack(k, down_stack, pop_count+1)
+        else
+          pop_count
+        end
+      end
+
+      def check_up_stack(k, up_stack, pop_count=0)
+        if up_stack.size == 1 && (up_stack[0].open > k.open)
+          up_stack.pop
+          check_up_stack(k, up_stack, pop_count+1)
+        elsif up_stack.size > 1 && (k.ratio_from(up_stack[-2]) > k.ratio_from(up_stack[-1]))
+          up_stack.pop
+          check_up_stack(k, up_stack, pop_count+1)
+        else
+          pop_count
+        end
+      end
     end
 
     class Strategy3
