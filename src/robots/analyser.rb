@@ -124,11 +124,24 @@ module Robots
     end
 
     class Strategy3
+      class Result
+        attr_reader :kline, :action
+
+        def initialize(kline, action)
+          @kline = kline
+          @action = action
+        end
+      end
+
       def initialize(klines)
         @klines = klines
       end
 
-      def execute; end
+      def execute
+        results = []
+
+        results
+      end
     end
 
     class Strategy4
