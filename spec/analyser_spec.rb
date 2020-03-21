@@ -1146,9 +1146,73 @@ RSpec.describe 'analyser' do
         expect(r1.kline.idx).to eq 4
       end
 
-      # it 'complex' do
-      #   # todo
-      # end
+      it 'complex' do
+        raw_klines = [
+          {
+            'open' => 7,
+            'close' => 8
+          },
+          {
+            'open' => 8,
+            'close' => 6
+          },
+          {
+            'open' => 6,
+            'close' => 7
+          },
+          {
+            'open' => 7,
+            'close' => 4
+          },
+          {
+            'open' => 4,
+            'close' => 5
+          },
+          {
+            'open' => 5,
+            'close' => 1
+          },
+          {
+            'open' => 1,
+            'close' => 5
+          },
+          {
+            'open' => 5,
+            'close' => 4
+          },
+          {
+            'open' => 4,
+            'close' => 3
+          },
+          {
+            'open' => 3,
+            'close' => 7
+          },
+          {
+            'open' => 7,
+            'close' => 2
+          },
+          {
+            'open' => 2,
+            'close' => 3
+          }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+
+        analyser = Robots::Analyser::Strategy2.new(klines)
+
+        results = analyser.execute
+        r1, r2, r3  = results
+
+        expect(results.size).to eq 3
+        expect(r1.action).to eq :buy
+        expect(r1.kline.idx).to eq 6
+        expect(r2.action).to eq :buy
+        expect(r2.kline.idx).to eq 9
+        expect(r3.action).to eq :sell
+        expect(r3.kline.idx).to eq 10
+      end
     end
   end
 
