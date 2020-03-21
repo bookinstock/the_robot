@@ -10,12 +10,14 @@ RSpec.describe 'analyser' do
   describe 'strategy 1' do
     describe 'only one kline' do
       it 'one up' do
-        klines = [
+        raw_klines = [
           {
             "open"=>1,
             "close"=>2
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -25,12 +27,14 @@ RSpec.describe 'analyser' do
       end
 
       it 'one down' do
-        klines = [
+        raw_klines = [
           {
             "open"=>2,
             "close"=>1
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -43,7 +47,7 @@ RSpec.describe 'analyser' do
     describe 'two klines' do
 
       it 'two perfect up' do
-        klines = [
+        raw_klines = [
           {
             "open"=>1,
             "close"=>2
@@ -52,7 +56,9 @@ RSpec.describe 'analyser' do
             "open"=>2,
             "close"=>3
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -62,7 +68,7 @@ RSpec.describe 'analyser' do
       end
 
       it 'two perfect down' do
-        klines = [
+        raw_klines = [
           {
             "open"=>3,
             "close"=>2
@@ -71,7 +77,9 @@ RSpec.describe 'analyser' do
             "open"=>2,
             "close"=>1
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -81,7 +89,7 @@ RSpec.describe 'analyser' do
       end
 
       it 'two overlap up' do
-        klines = [
+        raw_klines = [
           {
             "open"=>1,
             "close"=>3
@@ -90,7 +98,9 @@ RSpec.describe 'analyser' do
             "open"=>2,
             "close"=>4
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -100,7 +110,7 @@ RSpec.describe 'analyser' do
       end
 
       it 'two overlap down' do
-        klines = [
+        raw_klines = [
           {
             "open"=>4,
             "close"=>2
@@ -109,7 +119,9 @@ RSpec.describe 'analyser' do
             "open"=>3,
             "close"=>1
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -119,7 +131,7 @@ RSpec.describe 'analyser' do
       end
 
       it 'one big up and one little down' do
-        klines = [
+        raw_klines = [
           {
             "open"=>1,
             "close"=>3
@@ -128,7 +140,9 @@ RSpec.describe 'analyser' do
             "open"=>3,
             "close"=>2
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -138,7 +152,7 @@ RSpec.describe 'analyser' do
       end
 
       it 'one big down and one little up' do
-        klines = [
+        raw_klines = [
           {
             "open"=>4,
             "close"=>2
@@ -147,7 +161,9 @@ RSpec.describe 'analyser' do
             "open"=>2,
             "close"=>3
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -157,7 +173,7 @@ RSpec.describe 'analyser' do
       end
 
       it 'one up and one down' do
-        klines = [
+        raw_klines = [
           {
             "open"=>1,
             "close"=>3
@@ -166,7 +182,9 @@ RSpec.describe 'analyser' do
             "open"=>3,
             "close"=>1
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -179,7 +197,7 @@ RSpec.describe 'analyser' do
       end
 
       it 'one down and one up' do
-        klines = [
+        raw_klines = [
           {
             "open"=>3,
             "close"=>1
@@ -188,7 +206,9 @@ RSpec.describe 'analyser' do
             "open"=>1,
             "close"=>3
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -201,7 +221,7 @@ RSpec.describe 'analyser' do
       end
 
       it 'one little up and one big down' do
-        klines = [
+        raw_klines = [
           {
             "open"=>2,
             "close"=>3
@@ -210,7 +230,9 @@ RSpec.describe 'analyser' do
             "open"=>3,
             "close"=>1
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -223,7 +245,7 @@ RSpec.describe 'analyser' do
       end
 
       it 'one little down and one big up' do
-        klines = [
+        raw_klines = [
           {
             "open"=>2,
             "close"=>1
@@ -232,7 +254,9 @@ RSpec.describe 'analyser' do
             "open"=>1,
             "close"=>3
           }
-        ].map { |e| Models::Kline.new(e) }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -247,7 +271,7 @@ RSpec.describe 'analyser' do
 
     # describe 'more' do
     #   it 'up up up up' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>1,
     #         "close"=>2
@@ -264,7 +288,9 @@ RSpec.describe 'analyser' do
     #         "open"=>4,
     #         "close"=>5
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -274,7 +300,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'down down down down' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>5,
     #         "close"=>4
@@ -291,7 +317,9 @@ RSpec.describe 'analyser' do
     #         "open"=>3,
     #         "close"=>1
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -301,7 +329,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'little down in ups' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>1,
     #         "close"=>2
@@ -318,7 +346,9 @@ RSpec.describe 'analyser' do
     #         "open"=>3,
     #         "close"=>5
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -328,7 +358,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'little up in downs' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>5,
     #         "close"=>3
@@ -345,7 +375,9 @@ RSpec.describe 'analyser' do
     #         "open"=>3,
     #         "close"=>2
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -355,7 +387,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'two little downs in ups' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>1,
     #         "close"=>5
@@ -372,7 +404,9 @@ RSpec.describe 'analyser' do
     #         "open"=>3,
     #         "close"=>6
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -382,7 +416,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'two little ups in downs' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>6,
     #         "close"=>3
@@ -399,7 +433,9 @@ RSpec.describe 'analyser' do
     #         "open"=>5,
     #         "close"=>2
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -409,7 +445,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'two downs in ups' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>2,
     #         "close"=>5
@@ -426,7 +462,9 @@ RSpec.describe 'analyser' do
     #         "open"=>2,
     #         "close"=>3
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -439,7 +477,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'two ups in downs' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>6,
     #         "close"=>3
@@ -456,7 +494,9 @@ RSpec.describe 'analyser' do
     #         "open"=>6,
     #         "close"=>5
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -469,7 +509,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'two big downs in ups' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>2,
     #         "close"=>5
@@ -486,7 +526,9 @@ RSpec.describe 'analyser' do
     #         "open"=>1,
     #         "close"=>3
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -499,7 +541,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'two big ups in downs' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>6,
     #         "close"=>3
@@ -516,7 +558,9 @@ RSpec.describe 'analyser' do
     #         "open"=>7,
     #         "close"=>5
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -529,7 +573,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'up down up down' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>3,
     #         "close"=>5
@@ -546,7 +590,9 @@ RSpec.describe 'analyser' do
     #         "open"=>6,
     #         "close"=>1
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -563,7 +609,7 @@ RSpec.describe 'analyser' do
     #   end
 
     #   it 'down up down up' do
-    #     klines = [
+    #     raw_klines = [
     #       {
     #         "open"=>5,
     #         "close"=>4
@@ -580,7 +626,9 @@ RSpec.describe 'analyser' do
     #         "open"=>2,
     #         "close"=>10
     #       }
-    #     ].map { |e| Models::Kline.new(e) }
+    #     ]
+
+    #     klines = Models::KlinesBuilder.new(raw_klines).execute
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
@@ -681,7 +729,9 @@ RSpec.describe 'analyser' do
   #               'low' => 5090.01,
   #               'vol' => 3_420_375.8741301564 }]
 
-  #     @klines = data.map { |e| Models::Kline.new(e) }
+  #     @klines = Models::KlinesBuilder.new(data).execute
+
+
   #   end
 
   #   it 'find trun_klines' do
