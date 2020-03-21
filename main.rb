@@ -13,6 +13,7 @@ require './src/robot'
 require './src/api'
 require './src/init'
 require './src/robots/analyser'
+require './src/robots/simulator'
 
 access_key = ENV['ACCESS_KEY']
 secret_key = ENV['SECRET_KEY']
@@ -21,23 +22,32 @@ account_id = ENV['ACCOUNT_ID']
 api = Api.new(access_key, secret_key, account_id)
 
 # default => symbol='btcusdt', period='15min', size = 100
-puts 'start market_klines...'
-klines = api.market_klines
-puts 'end market_klines...'
+# puts 'start market_klines...'
+# klines = api.market_klines
+# puts 'end market_klines...'
 
 # store in redis
 list = Redis::List.new('klans', marshal: true)
-list.clear
-klines.each do |kline|
-  list << kline
-end
+# list.clear
+# klines.each do |kline|
+#   list << kline
+# end
+klines = list.values
+klines = klines.reverse
+klines.each_with_index { |k, idx| k.idx = idx }
 
-puts "from #{klines.last.time}"
-puts "to #{klines.first.time}"
 
-a = Robots::Analyser::Trend.new(klines.reverse)
+simulator = Robots::Simulator.new(klines)
 
-a.execute
+simulator.strategy_1
+
+
+puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
+simulator = Robots::Simulator.new(klines)
+
+simulator.strategy_2
+
 
 # kline_analyser = Robots::Analyser::Kline.new(klines)
 # kline_result = kline_analyser.execute
