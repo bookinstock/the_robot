@@ -969,7 +969,7 @@ RSpec.describe 'analyser' do
 
         expect(results.size).to eq 1
         expect(r1.action).to eq :buy
-        epeect(r1.kline.idx).to eq 4
+        expect(r1.kline.idx).to eq 4
       end
 
       # it 'down trend -> up down up (higher) down up (break)' do
