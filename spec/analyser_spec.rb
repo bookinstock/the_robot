@@ -267,381 +267,381 @@ RSpec.describe 'analyser' do
       end
     end
 
-    # describe 'more' do
-    #   it 'up up up up' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>1,
-    #         "close"=>2
-    #       },
-    #       {
-    #         "open"=>2,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>5
-    #       }
-    #     ]
+    describe 'more' do
+      it 'up up up up' do
+        raw_klines = [
+          {
+            "open"=>1,
+            "close"=>2
+          },
+          {
+            "open"=>2,
+            "close"=>4
+          },
+          {
+            "open"=>3,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>5
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
+        results = analyser.execute()
 
-    #     expect(results).to eq []
-    #   end
+        expect(results).to eq []
+      end
 
-    #   it 'down down down down' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>5,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>3
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>3
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>1
-    #       }
-    #     ]
+      it 'down down down down' do
+        raw_klines = [
+          {
+            "open"=>5,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>3
+          },
+          {
+            "open"=>3,
+            "close"=>3
+          },
+          {
+            "open"=>3,
+            "close"=>1
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
+        results = analyser.execute()
 
-    #     expect(results).to eq []
-    #   end
+        expect(results).to eq []
+      end
 
-    #   it 'little down in ups' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>1,
-    #         "close"=>2
-    #       },
-    #       {
-    #         "open"=>2,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>3
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>5
-    #       }
-    #     ]
+      it 'little down in ups' do
+        raw_klines = [
+          {
+            "open"=>1,
+            "close"=>2
+          },
+          {
+            "open"=>2,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>3
+          },
+          {
+            "open"=>3,
+            "close"=>5
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
+        results = analyser.execute()
 
-    #     expect(results).to eq []
-    #   end
+        expect(results).to eq []
+      end
 
-    #   it 'little up in downs' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>5,
-    #         "close"=>3
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>3
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>2
-    #       }
-    #     ]
+      it 'little up in downs' do
+        raw_klines = [
+          {
+            "open"=>5,
+            "close"=>3
+          },
+          {
+            "open"=>3,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>3
+          },
+          {
+            "open"=>3,
+            "close"=>2
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
+        results = analyser.execute()
 
-    #     expect(results).to eq []
-    #   end
+        expect(results).to eq []
+      end
 
-    #   it 'two little downs in ups' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>1,
-    #         "close"=>5
-    #       },
-    #       {
-    #         "open"=>5,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>3
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>6
-    #       }
-    #     ]
+      it 'two little downs in ups' do
+        raw_klines = [
+          {
+            "open"=>1,
+            "close"=>5
+          },
+          {
+            "open"=>5,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>3
+          },
+          {
+            "open"=>3,
+            "close"=>6
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
+        results = analyser.execute()
 
-    #     expect(results).to eq []
-    #   end
+        expect(results).to eq []
+      end
 
-    #   it 'two little ups in downs' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>6,
-    #         "close"=>3
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>5
-    #       },
-    #       {
-    #         "open"=>5,
-    #         "close"=>2
-    #       }
-    #     ]
+      it 'two little ups in downs' do
+        raw_klines = [
+          {
+            "open"=>6,
+            "close"=>3
+          },
+          {
+            "open"=>3,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>5
+          },
+          {
+            "open"=>5,
+            "close"=>2
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
+        results = analyser.execute()
 
-    #     expect(results).to eq []
-    #   end
+        expect(results).to eq []
+      end
 
-    #   it 'two downs in ups' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>2,
-    #         "close"=>5
-    #       },
-    #       {
-    #         "open"=>5,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>2
-    #       },
-    #       {
-    #         "open"=>2,
-    #         "close"=>3
-    #       }
-    #     ]
+      it 'two downs in ups' do
+        raw_klines = [
+          {
+            "open"=>2,
+            "close"=>5
+          },
+          {
+            "open"=>5,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>2
+          },
+          {
+            "open"=>2,
+            "close"=>3
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
-    #     r1 = results.first
+        results = analyser.execute()
+        r1 = results.first
 
-    #     expect(results.size).to eq 1
-    #     expect(r1.kline.idx).to eq 2
-    #     expect(r1.action).to eq :sell
-    #   end
+        expect(results.size).to eq 1
+        expect(r1.kline.idx).to eq 2
+        expect(r1.action).to eq :sell
+      end
 
-    #   it 'two ups in downs' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>6,
-    #         "close"=>3
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>6
-    #       },
-    #       {
-    #         "open"=>6,
-    #         "close"=>5
-    #       }
-    #     ]
+      it 'two ups in downs' do
+        raw_klines = [
+          {
+            "open"=>6,
+            "close"=>3
+          },
+          {
+            "open"=>3,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>6
+          },
+          {
+            "open"=>6,
+            "close"=>5
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
-    #     r1 = results.first
+        results = analyser.execute()
+        r1 = results.first
 
-    #     expect(results.size).to eq 1
-    #     expect(r1.kline.idx).to eq 2
-    #     expect(r1.action).to eq :buy
-    #   end
+        expect(results.size).to eq 1
+        expect(r1.kline.idx).to eq 2
+        expect(r1.action).to eq :buy
+      end
 
-    #   it 'two big downs in ups' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>2,
-    #         "close"=>5
-    #       },
-    #       {
-    #         "open"=>5,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>1
-    #       },
-    #       {
-    #         "open"=>1,
-    #         "close"=>3
-    #       }
-    #     ]
+      it 'two big downs in ups' do
+        raw_klines = [
+          {
+            "open"=>2,
+            "close"=>5
+          },
+          {
+            "open"=>5,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>1
+          },
+          {
+            "open"=>1,
+            "close"=>3
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
-    #     r1 = results.first
+        results = analyser.execute()
+        r1 = results.first
 
-    #     expect(results.size).to eq 1
-    #     expect(r1.kline.idx).to eq 2
-    #     expect(r1.action).to eq :sell
-    #   end
+        expect(results.size).to eq 1
+        expect(r1.kline.idx).to eq 2
+        expect(r1.action).to eq :sell
+      end
 
-    #   it 'two big ups in downs' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>6,
-    #         "close"=>3
-    #       },
-    #       {
-    #         "open"=>3,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>7
-    #       },
-    #       {
-    #         "open"=>7,
-    #         "close"=>5
-    #       }
-    #     ]
+      it 'two big ups in downs' do
+        raw_klines = [
+          {
+            "open"=>6,
+            "close"=>3
+          },
+          {
+            "open"=>3,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>7
+          },
+          {
+            "open"=>7,
+            "close"=>5
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
-    #     r1 = results.first
+        results = analyser.execute()
+        r1 = results.first
 
-    #     expect(results.size).to eq 1
-    #     expect(r1.kline.idx).to eq 2
-    #     expect(r1.action).to eq :buy
-    #   end
+        expect(results.size).to eq 1
+        expect(r1.kline.idx).to eq 2
+        expect(r1.action).to eq :buy
+      end
 
-    #   it 'up down up down' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>3,
-    #         "close"=>5
-    #       },
-    #       {
-    #         "open"=>5,
-    #         "close"=>2
-    #       },
-    #       {
-    #         "open"=>2,
-    #         "close"=>6
-    #       },
-    #       {
-    #         "open"=>6,
-    #         "close"=>1
-    #       }
-    #     ]
+      it 'up down up down' do
+        raw_klines = [
+          {
+            "open"=>3,
+            "close"=>5
+          },
+          {
+            "open"=>5,
+            "close"=>2
+          },
+          {
+            "open"=>2,
+            "close"=>6
+          },
+          {
+            "open"=>6,
+            "close"=>1
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
-    #     r1, r2, r3 = results
+        results = analyser.execute()
+        r1, r2, r3 = results
 
-    #     expect(results.size).to eq 3
-    #     expect(r1.kline.idx).to eq 1
-    #     expect(r1.action).to eq :sell
-    #     expect(r1.kline.idx).to eq 2
-    #     expect(r1.action).to eq :buy
-    #     expect(r1.kline.idx).to eq 3
-    #     expect(r1.action).to eq :sell
-    #   end
+        expect(results.size).to eq 3
+        expect(r1.kline.idx).to eq 1
+        expect(r1.action).to eq :sell
+        expect(r2.kline.idx).to eq 2
+        expect(r2.action).to eq :buy
+        expect(r3.kline.idx).to eq 3
+        expect(r3.action).to eq :sell
+      end
 
-    #   it 'down up down up' do
-    #     raw_klines = [
-    #       {
-    #         "open"=>5,
-    #         "close"=>4
-    #       },
-    #       {
-    #         "open"=>4,
-    #         "close"=>6
-    #       },
-    #       {
-    #         "open"=>6,
-    #         "close"=>2
-    #       },
-    #       {
-    #         "open"=>2,
-    #         "close"=>10
-    #       }
-    #     ]
+      it 'down up down up' do
+        raw_klines = [
+          {
+            "open"=>5,
+            "close"=>4
+          },
+          {
+            "open"=>4,
+            "close"=>6
+          },
+          {
+            "open"=>6,
+            "close"=>2
+          },
+          {
+            "open"=>2,
+            "close"=>10
+          }
+        ]
 
-    #     klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-    #     analyser = Robots::Analyser::Strategy1.new(klines)
+        analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     results = analyser.execute()
-    #     r1, r2, r3 = results
+        results = analyser.execute()
+        r1, r2, r3 = results
 
-    #     expect(results.size).to eq 3
-    #     expect(r1.kline.idx).to eq 1
-    #     expect(r1.action).to eq :buy
-    #     expect(r1.kline.idx).to eq 2
-    #     expect(r1.action).to eq :sell
-    #     expect(r1.kline.idx).to eq 3
-    #     expect(r1.action).to eq :buy
-    #   end
-    # end
+        expect(results.size).to eq 3
+        expect(r1.kline.idx).to eq 1
+        expect(r1.action).to eq :buy
+        expect(r2.kline.idx).to eq 2
+        expect(r2.action).to eq :sell
+        expect(r3.kline.idx).to eq 3
+        expect(r3.action).to eq :buy
+      end
+    end
   end
 
   # context 'klines' do

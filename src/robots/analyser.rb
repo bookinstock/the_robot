@@ -25,9 +25,15 @@ module Robots
           next if prev_k.trend == k.trend
 
           if prev_k.up?
-            results << Result.new(k, :sell) if prev_k.open >= k.close
+            if prev_k.open >= k.close
+              results << Result.new(k, :sell)
+              prev_k = k
+            end
           else
-            results << Result.new(k, :buy) if prev_k.open <= k.close
+            if prev_k.open <= k.close
+              results << Result.new(k, :buy)
+              prev_k = k
+            end
           end
         end
 
