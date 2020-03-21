@@ -19,9 +19,9 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        result = analyser.execute()
+        results = analyser.execute()
 
-        expect(result).to eq []
+        expect(results).to eq []
       end
 
       it 'one down' do
@@ -34,9 +34,9 @@ RSpec.describe 'analyser' do
 
         analyser = Robots::Analyser::Strategy1.new(klines)
 
-        result = analyser.execute()
+        results = analyser.execute()
 
-        expect(result).to eq []
+        expect(results).to eq []
       end
     end
 
@@ -56,9 +56,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'two perfect down' do
@@ -75,9 +75,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'two overlap up' do
@@ -94,9 +94,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'two overlap down' do
@@ -113,9 +113,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'one big up and one little down' do
@@ -132,9 +132,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'one big down and one little up' do
@@ -151,9 +151,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'one up and one down' do
@@ -170,10 +170,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1 = result.first
+    #     results = analyser.execute()
+    #     r1 = results.first
 
-    #     expect(result.size).to eq 1
+    #     expect(results.size).to eq 1
     #     expect(r1.kline.idx).to eq 1
     #     expect(r1.action).to eq :sell
     #   end
@@ -192,10 +192,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1 = result.first
+    #     results = analyser.execute()
+    #     r1 = results.first
 
-    #     expect(result.size).to eq 1
+    #     expect(results.size).to eq 1
     #     expect(r1.kline.idx).to eq 1
     #     expect(r1.action).to eq :buy
     #   end
@@ -214,10 +214,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1 = result.first
+    #     results = analyser.execute()
+    #     r1 = results.first
 
-    #     expect(result.size).to eq 1
+    #     expect(results.size).to eq 1
     #     expect(r1.kline.idx).to eq 1
     #     expect(r1.action).to eq :sell
     #   end
@@ -236,10 +236,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1 = result.first
+    #     results = analyser.execute()
+    #     r1 = results.first
 
-    #     expect(result.size).to eq 1
+    #     expect(results.size).to eq 1
     #     expect(r1.kline.idx).to eq 1
     #     expect(r1.action).to eq :buy
     #   end
@@ -268,9 +268,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'down down down down' do
@@ -295,9 +295,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'little down in ups' do
@@ -322,9 +322,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'little up in downs' do
@@ -349,9 +349,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'two little downs in ups' do
@@ -376,9 +376,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'two little ups in downs' do
@@ -403,9 +403,9 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
+    #     results = analyser.execute()
 
-    #     expect(result).to eq []
+    #     expect(results).to eq []
     #   end
 
     #   it 'two downs in ups' do
@@ -430,10 +430,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1 = result.first
+    #     results = analyser.execute()
+    #     r1 = results.first
 
-    #     expect(result.size).to eq 1
+    #     expect(results.size).to eq 1
     #     expect(r1.kline.idx).to eq 2
     #     expect(r1.action).to eq :sell
     #   end
@@ -460,10 +460,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1 = result.first
+    #     results = analyser.execute()
+    #     r1 = results.first
 
-    #     expect(result.size).to eq 1
+    #     expect(results.size).to eq 1
     #     expect(r1.kline.idx).to eq 2
     #     expect(r1.action).to eq :buy
     #   end
@@ -490,10 +490,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1 = result.first
+    #     results = analyser.execute()
+    #     r1 = results.first
 
-    #     expect(result.size).to eq 1
+    #     expect(results.size).to eq 1
     #     expect(r1.kline.idx).to eq 2
     #     expect(r1.action).to eq :sell
     #   end
@@ -520,10 +520,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1 = result.first
+    #     results = analyser.execute()
+    #     r1 = results.first
 
-    #     expect(result.size).to eq 1
+    #     expect(results.size).to eq 1
     #     expect(r1.kline.idx).to eq 2
     #     expect(r1.action).to eq :buy
     #   end
@@ -550,10 +550,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1, r2, r3 = result
+    #     results = analyser.execute()
+    #     r1, r2, r3 = results
 
-    #     expect(result.size).to eq 3
+    #     expect(results.size).to eq 3
     #     expect(r1.kline.idx).to eq 1
     #     expect(r1.action).to eq :sell
     #     expect(r1.kline.idx).to eq 2
@@ -584,10 +584,10 @@ RSpec.describe 'analyser' do
 
     #     analyser = Robots::Analyser::Strategy1.new(klines)
 
-    #     result = analyser.execute()
-    #     r1, r2, r3 = result
+    #     results = analyser.execute()
+    #     r1, r2, r3 = results
 
-    #     expect(result.size).to eq 3
+    #     expect(results.size).to eq 3
     #     expect(r1.kline.idx).to eq 1
     #     expect(r1.action).to eq :buy
     #     expect(r1.kline.idx).to eq 2
