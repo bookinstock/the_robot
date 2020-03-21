@@ -972,179 +972,179 @@ RSpec.describe 'analyser' do
         expect(r1.kline.idx).to eq 4
       end
 
-      # it 'down trend -> up down up (higher) down up (break)' do
-      #   raw_klines = [
-      #     {
-      #       'open' => 6,
-      #       'close' => 7
-      #     },
-      #     {
-      #       'open' => 7,
-      #       'close' => 5
-      #     },
-      #     {
-      #       'open' => 5,
-      #       'close' => 6
-      #     },
-      #     {
-      #       'open' => 6,
-      #       'close' => 3
-      #     },
-      #     {
-      #       'open' => 3,
-      #       'close' => 10
-      #     }
-      #   ]
+      it 'down trend -> up down up (higher) down up (break)' do
+        raw_klines = [
+          {
+            'open' => 6,
+            'close' => 7
+          },
+          {
+            'open' => 7,
+            'close' => 5
+          },
+          {
+            'open' => 5,
+            'close' => 6
+          },
+          {
+            'open' => 6,
+            'close' => 3
+          },
+          {
+            'open' => 3,
+            'close' => 10
+          }
+        ]
 
-      #   klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-      #   analyser = Robots::Analyser::Strategy2.new(klines)
+        analyser = Robots::Analyser::Strategy2.new(klines)
 
-      #   results = analyser.execute
-      #   r1 = results.first
+        results = analyser.execute
+        r1 = results.first
 
-      #   expect(results.size).to eq 1
-      #   expect(r1.action).to eq :buy
-      #   epeect(r1.kline.idx).to eq 4
-      # end
+        expect(results.size).to eq 1
+        expect(r1.action).to eq :buy
+        expect(r1.kline.idx).to eq 4
+      end
 
-      # it 'down trend -> down up down up down' do
-      #   raw_klines = [
-      #     {
-      #       'open' => 6,
-      #       'close' => 4
-      #     },
-      #     {
-      #       'open' => 4,
-      #       'close' => 5
-      #     },
-      #     {
-      #       'open' => 5,
-      #       'close' => 3
-      #     },
-      #     {
-      #       'open' => 3,
-      #       'close' => 4
-      #     },
-      #     {
-      #       'open' => 4,
-      #       'close' => 1
-      #     }
-      #   ]
+      it 'down trend -> down up down up down' do
+        raw_klines = [
+          {
+            'open' => 6,
+            'close' => 4
+          },
+          {
+            'open' => 4,
+            'close' => 5
+          },
+          {
+            'open' => 5,
+            'close' => 3
+          },
+          {
+            'open' => 3,
+            'close' => 4
+          },
+          {
+            'open' => 4,
+            'close' => 1
+          }
+        ]
 
-      #   klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-      #   analyser = Robots::Analyser::Strategy2.new(klines)
+        analyser = Robots::Analyser::Strategy2.new(klines)
 
-      #   results = analyser.execute
+        results = analyser.execute
 
-      #   expect(results).to eq []
-      # end
+        expect(results).to eq []
+      end
 
-      # it 'up trend -> down up down up down (not break)' do
-      #   raw_klines = [
-      #     {
-      #       'open' => 2,
-      #       'close' => 1
-      #     },
-      #     {
-      #       'open' => 1,
-      #       'close' => 3
-      #     },
-      #     {
-      #       'open' => 3,
-      #       'close' => 2
-      #     },
-      #     {
-      #       'open' => 2,
-      #       'close' => 4
-      #     },
-      #     {
-      #       'open' => 4,
-      #       'close' => 3
-      #     }
-      #   ]
+      it 'up trend -> down up down up down (not break)' do
+        raw_klines = [
+          {
+            'open' => 2,
+            'close' => 1
+          },
+          {
+            'open' => 1,
+            'close' => 3
+          },
+          {
+            'open' => 3,
+            'close' => 2
+          },
+          {
+            'open' => 2,
+            'close' => 4
+          },
+          {
+            'open' => 4,
+            'close' => 3
+          }
+        ]
 
-      #   klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-      #   analyser = Robots::Analyser::Strategy2.new(klines)
+        analyser = Robots::Analyser::Strategy2.new(klines)
 
-      #   results = analyser.execute
+        results = analyser.execute
 
-      #   expect(results).to eq []
-      # end
+        expect(results).to eq []
+      end
 
-      # it 'up trend -> down up down up down (break)' do
-      #   raw_klines = [
-      #     {
-      #       'open' => 3,
-      #       'close' => 2
-      #     },
-      #     {
-      #       'open' => 2,
-      #       'close' => 4
-      #     },
-      #     {
-      #       'open' => 4,
-      #       'close' => 3
-      #     },
-      #     {
-      #       'open' => 3,
-      #       'close' => 5
-      #     },
-      #     {
-      #       'open' => 5,
-      #       'close' => 3
-      #     }
-      #   ]
+      it 'up trend -> down up down up down (break)' do
+        raw_klines = [
+          {
+            'open' => 3,
+            'close' => 2
+          },
+          {
+            'open' => 2,
+            'close' => 4
+          },
+          {
+            'open' => 4,
+            'close' => 3
+          },
+          {
+            'open' => 3,
+            'close' => 5
+          },
+          {
+            'open' => 5,
+            'close' => 3
+          }
+        ]
 
-      #   klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-      #   analyser = Robots::Analyser::Strategy2.new(klines)
+        analyser = Robots::Analyser::Strategy2.new(klines)
 
-      #   results = analyser.execute
-      #   r1 = results.first
+        results = analyser.execute
+        r1 = results.first
 
-      #   expect(results.size).to eq 1
-      #   expect(r1.action).to eq :sell
-      #   epeect(r1.kline.idx).to eq 4
-      # end
+        expect(results.size).to eq 1
+        expect(r1.action).to eq :sell
+        expect(r1.kline.idx).to eq 4
+      end
 
-      # it 'down trend -> up down up (higher) down up (break)' do
-      #   raw_klines = [
-      #     {
-      #       'open' => 3,
-      #       'close' => 2
-      #     },
-      #     {
-      #       'open' => 2,
-      #       'close' => 4
-      #     },
-      #     {
-      #       'open' => 4,
-      #       'close' => 3
-      #     },
-      #     {
-      #       'open' => 3,
-      #       'close' => 5
-      #     },
-      #     {
-      #       'open' => 5,
-      #       'close' => 1
-      #     }
-      #   ]
+      it 'down trend -> up down up (higher) down up (break)' do
+        raw_klines = [
+          {
+            'open' => 3,
+            'close' => 2
+          },
+          {
+            'open' => 2,
+            'close' => 4
+          },
+          {
+            'open' => 4,
+            'close' => 3
+          },
+          {
+            'open' => 3,
+            'close' => 5
+          },
+          {
+            'open' => 5,
+            'close' => 1
+          }
+        ]
 
-      #   klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
 
-      #   analyser = Robots::Analyser::Strategy2.new(klines)
+        analyser = Robots::Analyser::Strategy2.new(klines)
 
-      #   results = analyser.execute
-      #   r1 = results.first
+        results = analyser.execute
+        r1 = results.first
 
-      #   expect(results.size).to eq 1
-      #   expect(r1.action).to eq :sell
-      #   epeect(r1.kline.idx).to eq 4
-      # end
+        expect(results.size).to eq 1
+        expect(r1.action).to eq :sell
+        expect(r1.kline.idx).to eq 4
+      end
 
       # it 'complex' do
       #   # todo
