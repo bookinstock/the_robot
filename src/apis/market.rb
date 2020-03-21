@@ -26,8 +26,8 @@ module Apis
       request_method = 'GET'
       params = { 'symbol' => symbol, 'period' => period, 'size' => size }
       response = util(path, params, request_method)
-      # pp response
-      response['data'].map { |e| Models::Kline.new(e) }
+      klines = response['data'].map { |e| Models::Kline.new(e) }
+      klines.reverse
     end
 
     def market_ticker(symbol)
