@@ -1234,6 +1234,119 @@ RSpec.describe 'analyser' do
 
         expect(results).to eq []
       end
+
+      it 'one down' do
+        raw_klines = [
+          {
+            'open' => 2,
+            'close' => 1
+          }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+
+        analyser = Robots::Analyser::Strategy3.new(klines)
+
+        results = analyser.execute
+
+        expect(results).to eq []
+      end
+    end
+
+    describe 'two' do
+      it 'up up' do
+        raw_klines = [
+          {
+            'open' => 1,
+            'close' => 2
+          },
+          {
+            'open' => 2,
+            'close' => 3
+          }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+
+        analyser = Robots::Analyser::Strategy3.new(klines)
+
+        results = analyser.execute
+
+        expect(results).to eq []
+      end
+
+      it 'down down' do
+        raw_klines = [
+          {
+            'open' => 3,
+            'close' => 2
+          },
+          {
+            'open' => 2,
+            'close' => 1
+          }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+
+        analyser = Robots::Analyser::Strategy3.new(klines)
+
+        results = analyser.execute
+
+        expect(results).to eq []
+      end
+    end
+
+    describe 'three' do
+      it 'up up up' do
+        raw_klines = [
+          {
+            'open' => 1,
+            'close' => 2
+          },
+          {
+            'open' => 2,
+            'close' => 3
+          },
+          {
+            'open' => 3,
+            'close' => 4
+          }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+
+        analyser = Robots::Analyser::Strategy3.new(klines)
+
+        results = analyser.execute
+
+        expect(results).to eq []
+      end
+
+      it 'down down down' do
+        raw_klines = [
+          {
+            'open' => 3,
+            'close' => 2
+          },
+          {
+            'open' => 2,
+            'close' => 1
+          },
+          {
+            'open' => 1,
+            'close' => 0.1
+          }
+        ]
+
+        klines = Models::KlinesBuilder.new(raw_klines).execute(reverse: false)
+
+        analyser = Robots::Analyser::Strategy3.new(klines)
+
+        results = analyser.execute
+
+        expect(results).to eq []
+      end
     end
   end
 
