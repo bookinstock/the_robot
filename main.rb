@@ -21,9 +21,9 @@ account_id = ENV['ACCOUNT_ID']
 api = Api.new(access_key, secret_key, account_id)
 
 # default => symbol='btcusdt', period='15min', size = 100
-puts "start market_klines..."
+puts 'start market_klines...'
 klines = api.market_klines
-puts "end market_klines..."
+puts 'end market_klines...'
 
 # store in redis
 list = Redis::List.new('klans', marshal: true)
@@ -38,8 +38,6 @@ puts "to #{klines.first.time}"
 a = Robots::Analyser::Trend.new(klines.reverse)
 
 a.execute
-
-
 
 # kline_analyser = Robots::Analyser::Kline.new(klines)
 # kline_result = kline_analyser.execute

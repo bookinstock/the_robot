@@ -8,18 +8,18 @@ RSpec.describe 'kline' do
     it 'example' do
       raw_klines = [
         {
-          "open"=>1,
-          "close"=>2
+          'open' => 1,
+          'close' => 2
         },
         {
-          "open"=>2,
-          "close"=>3
+          'open' => 2,
+          'close' => 3
         }
       ]
 
       builder = Models::KlinesBuilder.new(raw_klines)
 
-      klines = builder.execute()
+      klines = builder.execute
       k1, k2 = klines
 
       expect(klines.size).to eq 2

@@ -2,7 +2,6 @@
 
 module Robots
   module Analyser
-
     class Strategy1
       class Result
         attr_reader :kline, :action
@@ -26,13 +25,9 @@ module Robots
           next if prev_k.trend == k.trend
 
           if prev_k.up?
-            if prev_k.open >= k.close
-              results << Result.new(k, :sell)
-            end
+            results << Result.new(k, :sell) if prev_k.open >= k.close
           else
-            if prev_k.open <= k.close
-              results << Result.new(k, :buy)
-            end
+            results << Result.new(k, :buy) if prev_k.open <= k.close
           end
         end
 
@@ -53,9 +48,7 @@ module Robots
         @klines = klines
       end
 
-      def execute
-
-      end
+      def execute; end
     end
 
     class Strategy3
@@ -63,9 +56,7 @@ module Robots
         @klines = klines
       end
 
-      def execute
-
-      end
+      def execute; end
     end
 
     class Strategy4
@@ -73,9 +64,7 @@ module Robots
         @klines = klines
       end
 
-      def execute
-
-      end
+      def execute; end
     end
 
     class Trend
@@ -91,26 +80,24 @@ module Robots
           if prev.up?
             if kline.close > prev.open
               # puts :trend_keep_up
-              puts "拿住"
+              puts '拿住'
             else
               # puts :trend_turn_down
-              puts "卖"
+              puts '卖'
             end
           else
             if kline.close < prev.open
               # puts :trend_keep_down
-              puts "忍住"
+              puts '忍住'
             else
               # puts :trend_turn_up
-              puts "买"
+              puts '买'
             end
           end
         end
       end
 
-      def update(kline)
-
-      end
+      def update(kline); end
     end
 
     class TrendLine
