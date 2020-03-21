@@ -4,19 +4,43 @@ module Robots
   module Analyser
 
     class Strategy1
+      def initialize(klines)
+        @klines = klines
+      end
 
+      def execute
+
+      end
     end
 
     class Strategy2
+      def initialize(klines)
+        @klines = klines
+      end
 
+      def execute
+
+      end
     end
 
     class Strategy3
+      def initialize(klines)
+        @klines = klines
+      end
 
+      def execute
+
+      end
     end
 
     class Strategy4
+      def initialize(klines)
+        @klines = klines
+      end
 
+      def execute
+
+      end
     end
 
     class Trend
