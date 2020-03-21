@@ -2,6 +2,23 @@
 
 module Robots
   module Analyser
+
+    class Strategy1
+
+    end
+
+    class Strategy2
+
+    end
+
+    class Strategy3
+
+    end
+
+    class Strategy4
+
+    end
+
     class Trend
       def initialize(klines)
         @klines = klines
