@@ -4,12 +4,47 @@ module Robots
   module Analyser
 
     class Strategy1
+      class Result
+        attr_reader :kline, :action
+
+        def initialize(kline, action)
+          @kline = kline
+          @action = action
+        end
+      end
+
       def initialize(klines)
         @klines = klines
       end
 
       def execute
+        results = []
 
+        prev_k = first_k
+
+        rest_ks.each do |k|
+          next if prev_k.trend == k.trend
+
+          if prev_k.up?
+            if prev_k.open >= k.close
+              results << Result.new(k, :sell)
+            end
+          else
+            if prev_k.open <= k.close
+              results << Result.new(k, :buy)
+            end
+          end
+        end
+
+        results
+      end
+
+      def first_k
+        @klines.first
+      end
+
+      def rest_ks
+        @klines[1..-1]
       end
     end
 
