@@ -98,25 +98,25 @@ module Robots
         @klines[1..-1]
       end
 
-      def check_down_stack(k, down_stack, break_count=0)
+      def check_down_stack(k, down_stack, break_count = 0)
         if down_stack.size == 1 && (down_stack[0].open < k.close)
           down_stack.pop
           break_count
         elsif down_stack.size > 1 && (k.ratio_close(down_stack[-2]) > down_stack[-1].ratio_open(down_stack[-2]))
           down_stack.pop
-          check_down_stack(k, down_stack, break_count+1)
+          check_down_stack(k, down_stack, break_count + 1)
         else
           break_count
         end
       end
 
-      def check_up_stack(k, up_stack, break_count=0)
+      def check_up_stack(k, up_stack, break_count = 0)
         if up_stack.size == 1 && (up_stack[0].open > k.close)
           up_stack.pop
           break_count
         elsif up_stack.size > 1 && (k.ratio_close(up_stack[-2]) < up_stack[-1].ratio_open(up_stack[-2]))
           up_stack.pop
-          check_up_stack(k, up_stack, break_count+1)
+          check_up_stack(k, up_stack, break_count + 1)
         else
           break_count
         end

@@ -1203,7 +1203,7 @@ RSpec.describe 'analyser' do
         analyser = Robots::Analyser::Strategy2.new(klines)
 
         results = analyser.execute
-        r1, r2, r3  = results
+        r1, r2, r3 = results
 
         expect(results.size).to eq 3
         expect(r1.action).to eq :buy
