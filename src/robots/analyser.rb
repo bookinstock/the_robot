@@ -52,6 +52,15 @@ module Robots
     end
 
     class Strategy2
+      class Result
+        attr_reader :kline, :action
+
+        def initialize(kline, action)
+          @kline = kline
+          @action = action
+        end
+      end
+
       def initialize(klines)
         @klines = klines
       end
@@ -64,21 +73,16 @@ module Robots
         prev_k = first_k
 
         rest_ks.each do |k|
-          if prev_k.up?
-            if k.up?
-              pop_count = check_down_stack(k, down_stack)
-              results << Result.new(k, :buy) if pop_count > 0
-            else
-              down_stack << k
-            end
+          if k.up?
+            break_count = check_down_stack(k, down_stack)
+            results << Result.new(k, :buy) if break_count > 0
+            up_stack << k if prev_k.down?
           else
-            if k.up?
-              up_stack << k
-            else
-              pop_count = check_up_stack(k, up_stack)
-              results << Result.new(k, :sell) if pop_count > 0
-            end
+            break_count = check_up_stack(k, up_stack)
+            results << Result.new(k, :sell) if break_count > 0
+            down_stack << k if prev_k.up?
           end
+          prev_k = k
         end
 
         results
@@ -94,27 +98,27 @@ module Robots
         @klines[1..-1]
       end
 
-      def check_down_stack(k, down_stack, pop_count=0)
-        if down_stack.size == 1 && (down_stack[0].open < k.open)
+      def check_down_stack(k, down_stack, break_count=0)
+        if down_stack.size == 1 && (down_stack[0].open < k.close)
           down_stack.pop
-          check_down_stack(k, down_stack, pop_count+1)
-        elsif down_stack.size > 1 && (k.ratio_from(down_stack[-2]) > k.ratio_from(down_stack[-1]))
+          break_count
+        elsif down_stack.size > 1 && (k.ratio_close(down_stack[-2]) < down_stack[-1].ratio_open(down_stack[-2]))
           down_stack.pop
-          check_down_stack(k, down_stack, pop_count+1)
+          check_down_stack(k, down_stack, break_count+1)
         else
-          pop_count
+          break_count
         end
       end
 
-      def check_up_stack(k, up_stack, pop_count=0)
-        if up_stack.size == 1 && (up_stack[0].open > k.open)
+      def check_up_stack(k, up_stack, break_count=0)
+        if up_stack.size == 1 && (up_stack[0].open > k.close)
           up_stack.pop
-          check_up_stack(k, up_stack, pop_count+1)
-        elsif up_stack.size > 1 && (k.ratio_from(up_stack[-2]) > k.ratio_from(up_stack[-1]))
+          break_count
+        elsif up_stack.size > 1 && (k.ratio_close(up_stack[-2]) < up_stack[-1].ratio_open(up_stack[-2]))
           up_stack.pop
-          check_up_stack(k, up_stack, pop_count+1)
+          check_up_stack(k, up_stack, break_count+1)
         else
-          pop_count
+          break_count
         end
       end
     end
