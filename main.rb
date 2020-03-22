@@ -22,19 +22,19 @@ account_id = ENV['ACCOUNT_ID']
 api = Api.new(access_key, secret_key, account_id)
 
 # default => symbol='btcusdt', period='15min', size = 100
-# puts 'start market_klines...'
-# klines = api.market_klines
-# puts 'end market_klines...'
+puts 'start market_klines...'
+klines = api.market_klines(symbol = 'btcusdt', period = '60min', size = 1000)
+puts 'end market_klines...'
 
-# store in redis
-list = Redis::List.new('klans', marshal: true)
-# list.clear
-# klines.each do |kline|
-#   list << kline
-# end
-klines = list.values
-klines = klines.reverse
-klines.each_with_index { |k, idx| k.idx = idx }
+# # store in redis
+# list = Redis::List.new('klans', marshal: true)
+# # list.clear
+# # klines.each do |kline|
+# #   list << kline
+# # end
+# klines = list.values
+# klines = klines.reverse
+# klines.each_with_index { |k, idx| k.idx = idx }
 
 
 simulator = Robots::Simulator.new(klines)
